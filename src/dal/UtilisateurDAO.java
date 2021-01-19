@@ -13,6 +13,8 @@ import bo.Utilisateur;
 public class UtilisateurDAO {
 	
 	private static final String SELECT = "SELECT * FROM UTILISATEURS WHERE  pseudo = ? AND mot_de_passe = ? ";
+	private static final String INSERT = " INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe)" +
+							" VALUES (?,?,?,?,?,?,?,?,?)";
 	
 	Utilisateur utilisateurCnx;
 	
@@ -32,6 +34,7 @@ public class UtilisateurDAO {
 			{
 				
 				utilisateurCnx=new Utilisateur();
+				utilisateurCnx.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				utilisateurCnx.setPseudo(rs.getString("pseudo"));
 				utilisateurCnx.setMotDePasse(rs.getString("mot_de_passe"));
 				utilisateurCnx.setNom(rs.getString("nom"));
@@ -47,7 +50,7 @@ public class UtilisateurDAO {
 			}
 		} catch (SQLException e) {
 			//propager une exception personnalisée
-			throw new Exception("Problème d'extraction des repas de la base. Cause : " + e.getMessage());
+			throw new Exception("Problème d'extraction des utilisateurs de la base. Cause : " + e.getMessage());
 		}
 			
 	
@@ -55,7 +58,34 @@ public class UtilisateurDAO {
 	}
 	
 	
+	public Utilisateur insert(Utilisateur utilisateur) {
+		
 	
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT);
+
+			ResultSet rs;
+			
+			pstmt.setString(1, utilisateur.getPseudo());
+			pstmt.setString(2, utilisateur.getNom());
+			pstmt.setString(3, utilisateur.getPrenom());
+			pstmt.setString(4, utilisateur.getEmail());
+			pstmt.setString(5, utilisateur.getTelephone());
+			pstmt.setString(6, utilisateur.getRue());
+			pstmt.setString(7, utilisateur.getCodePostal());
+			pstmt.setString(8, utilisateur.getVille());
+			pstmt.setString(9, utilisateur.getMotDePasse());
+			
+			pstmt.executeUpdate();
+			//rs
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return utilisateur;
+	}
 	
 
 }

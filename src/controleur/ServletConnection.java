@@ -47,21 +47,21 @@ public class ServletConnection extends HttpServlet {
 		
 		Utilisateur utilisateur = new Utilisateur(pseudo, password);
 		
-		Utilisateur utilisateurCnx = new Utilisateur(pseudo, password);
+		Utilisateur utilisateurCnx = null;
 		
 		ConnectionManager mgr = new ConnectionManager();
 		try {
 			utilisateurCnx = mgr.verifier(utilisateur);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block (Gérer l'exception)
 			e.printStackTrace();
 		}
 		
 		if (utilisateurCnx != null) {
 		
 			HttpSession session = request.getSession();
-			session.setAttribute("pseudo", pseudo);
-			session.setAttribute("password", password);
+			
+			session.setAttribute("utilisateurCnx", utilisateurCnx);
 		}else {
 			message = "pseudo ou mot de passe non valide";
 			request.setAttribute("message", message);
@@ -70,5 +70,4 @@ public class ServletConnection extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
 		rd.forward(request, response);
 	}
-
 }

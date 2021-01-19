@@ -26,10 +26,16 @@
 	<h1>ENI ENCHERES</h1>
 	<h2>Liste des enchères</h2>
 
-	<a href="${pageContext.request.contextPath }/connect">${empty sessionScope.pseudo ? "Se connecter" : "Se déconnecter"} </a>
-
-	<c:if test="${!empty sessionScope.pseudo }">
-		<p>Bienvenue ${pseudo}</p>
+	<c:if test="">
+	
 	</c:if>
+	<a href="${pageContext.request.contextPath }/connect">${empty sessionScope.utilisateurCnx.pseudo ? "Se connecter" : "Se déconnecter"} </a>
+	
+	<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
+		<p>Bienvenue ${utilisateurCnx.pseudo}</p>
+	</c:if>
+	
+	<a href="${pageContext.request.contextPath }/inscription">S'inscrire</a>
+	
 </body>
 </html>
