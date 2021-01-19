@@ -42,20 +42,22 @@ public class ServletConnection extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
-		boolean ok = false;
+	
 		String message = null;
 		
 		Utilisateur utilisateur = new Utilisateur(pseudo, password);
 		
+		Utilisateur utilisateurCnx = new Utilisateur(pseudo, password);
+		
 		ConnectionManager mgr = new ConnectionManager();
 		try {
-			ok = mgr.verifier(utilisateur);
+			utilisateurCnx = mgr.verifier(utilisateur);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		if (ok) {
+		if (utilisateurCnx != null) {
 		
 			HttpSession session = request.getSession();
 			session.setAttribute("pseudo", pseudo);
@@ -65,7 +67,7 @@ public class ServletConnection extends HttpServlet {
 			request.setAttribute("message", message);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil/accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
 		rd.forward(request, response);
 	}
 

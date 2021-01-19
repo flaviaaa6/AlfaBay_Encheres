@@ -1,6 +1,7 @@
 package dal;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,33 +12,46 @@ import bo.Utilisateur;
 
 public class UtilisateurDAO {
 	
-	private static final String SELECT = "SELECT pseudo, mot_de_passe FROM UTILISATEUR";
+	private static final String SELECT = "SELECT * FROM UTILISATEURS WHERE  pseudo = ? AND mot_de_passe = ? ";
 	
+	Utilisateur utilisateurCnx;
 	
-	public List<Utilisateur> select() throws Exception {
+	public Utilisateur select(Utilisateur u) throws Exception {
 		
-		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+		
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
-			Statement rqt = cnx.createStatement();
-			ResultSet rs = rqt.executeQuery(SELECT);
-			while(rs.next())
+			PreparedStatement rqt = cnx.prepareStatement(SELECT);
+			
+			rqt.setString(1, u.getPseudo());
+			rqt.setString(2, u.getMotDePasse());
+			
+			
+			ResultSet rs = rqt.executeQuery();
+			if(rs.next())
 			{
-				Utilisateur utilisateur;
-				utilisateur=new Utilisateur();
-				utilisateur.setPseudo(rs.getString("pseudo"));
-				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-				utilisateurs.add(utilisateur);
+				
+				utilisateurCnx=new Utilisateur();
+				utilisateurCnx.setPseudo(rs.getString("pseudo"));
+				utilisateurCnx.setMotDePasse(rs.getString("mot_de_passe"));
+				utilisateurCnx.setNom(rs.getString("nom"));
+				utilisateurCnx.setPrenom(rs.getString("prenom"));
+				utilisateurCnx.setEmail(rs.getString("email"));
+				utilisateurCnx.setTelephone(rs.getString("telephone"));
+				utilisateurCnx.setRue(rs.getString("rue"));
+				utilisateurCnx.setCodePostal(rs.getString("code_postal"));
+				utilisateurCnx.setVille(rs.getString("ville"));
+				utilisateurCnx.setCredit(rs.getInt("credit"));
+				utilisateurCnx.setAdministrateur(rs.getBoolean("administration"));
+				
 			}
 		} catch (SQLException e) {
 			//propager une exception personnalisée
 			throw new Exception("Problème d'extraction des repas de la base. Cause : " + e.getMessage());
 		}
 			
-		
-		
-		
-		return utilisateurs;
+	
+		return utilisateurCnx;
 	}
 	
 	

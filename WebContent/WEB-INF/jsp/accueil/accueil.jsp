@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +23,13 @@
 </head>
 <body>
 
-<h1>ENI ENCHERES</h1>
-<h2>Liste des enchères</h2>
+	<h1>ENI ENCHERES</h1>
+	<h2>Liste des enchères</h2>
 
-<a href="${pageContext.request.contextPath }/connect"> Se connecter</a>
+	<a href="${pageContext.request.contextPath }/connect">${empty sessionScope.pseudo ? "Se connecter" : "Se déconnecter"} </a>
 
+	<c:if test="${!empty sessionScope.pseudo }">
+		<p>Bienvenue ${pseudo}</p>
+	</c:if>
 </body>
 </html>
