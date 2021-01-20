@@ -8,7 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bo.Utilisateur;
+import exceptions.BuisnessException;
 import manager.ConnectionManager;
 
 /**
@@ -40,6 +43,7 @@ public class ServletInscrire extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Utilisateur utilisateurConnecte = null;
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("lastname");
 		String prenom = request.getParameter("firstname");
@@ -49,10 +53,22 @@ public class ServletInscrire extends HttpServlet {
 		String codePostal = request.getParameter("zipcode");
 		String ville = request.getParameter("city");
 		String motDePasse = request.getParameter("password");
+		String confirmMotDePasse = request.getParameter("confirm_password");
 		
 		ConnectionManager mgr = new ConnectionManager();
-		mgr.inscrire(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		try {
+			utilisateurConnecte = mgr.inscrire(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmMotDePasse);
+		} catch (BuisnessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (utilisateurConnecte != null) {
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("utilisateurCnx", utilisateurConnecte);
 		doGet(request, response);
 	}
 
+}
 }

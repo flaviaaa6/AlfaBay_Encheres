@@ -58,7 +58,7 @@ public class UtilisateurDAO {
 	}
 	
 	
-	public Utilisateur insert(Utilisateur utilisateur) {
+	public Utilisateur insert(Utilisateur utilisateur) throws Exception {
 		PreparedStatement pstmt;
 		ResultSet rs;
 	
@@ -81,10 +81,13 @@ public class UtilisateurDAO {
 			
 			if(rs.next()){
 				utilisateur.setNoUtilisateur(rs.getInt(1));
+				utilisateur.setCredit(0);
+				utilisateur.setAdministrateur(false);
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new Exception("Problème d'insertion de l'utilisateur dans la base. Cause : " + e.getMessage());
 		}
 
 		return utilisateur;
