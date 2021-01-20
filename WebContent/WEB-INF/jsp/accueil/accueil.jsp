@@ -23,7 +23,7 @@
 </head>
 <body>
 
-	<h1>ENI ENCHERES</h1>
+	<h1>AlfaBay ENCHERES</h1>
 	<h2>Liste des enchères</h2>
 
 	<c:if test="">

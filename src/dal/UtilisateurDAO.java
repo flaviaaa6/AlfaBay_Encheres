@@ -45,7 +45,7 @@ public class UtilisateurDAO {
 				utilisateurCnx.setCodePostal(rs.getString("code_postal"));
 				utilisateurCnx.setVille(rs.getString("ville"));
 				utilisateurCnx.setCredit(rs.getInt("credit"));
-				utilisateurCnx.setAdministrateur(rs.getBoolean("administration"));
+				utilisateurCnx.setAdministrateur(rs.getBoolean("administrateur"));
 				
 			}
 		} catch (SQLException e) {
@@ -59,13 +59,12 @@ public class UtilisateurDAO {
 	
 	
 	public Utilisateur insert(Utilisateur utilisateur) {
-		
+		PreparedStatement pstmt;
+		ResultSet rs;
 	
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(INSERT);
-
-			ResultSet rs;
+			pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, utilisateur.getPseudo());
 			pstmt.setString(2, utilisateur.getNom());
@@ -78,7 +77,11 @@ public class UtilisateurDAO {
 			pstmt.setString(9, utilisateur.getMotDePasse());
 			
 			pstmt.executeUpdate();
-			//rs
+			rs = pstmt.getGeneratedKeys();
+			
+			if(rs.next()){
+				utilisateur.setNoUtilisateur(rs.getInt(1));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
