@@ -42,7 +42,7 @@ public class ServletInscrire extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String message = null;
 		Utilisateur utilisateurConnecte = null;
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("lastname");
@@ -59,16 +59,19 @@ public class ServletInscrire extends HttpServlet {
 		try {
 			utilisateurConnecte = mgr.inscrire(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmMotDePasse);
 		} catch (BuisnessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("erreurs", e.getListeMessagesErreur());
+			message = "Erreur, l'utilisateur n'a pas été ajouté !";
 		}
 		if (utilisateurConnecte != null) {
-			
+			message = "inscription terminée";
 			HttpSession session = request.getSession();
-			
 			session.setAttribute("utilisateurCnx", utilisateurConnecte);
-		doGet(request, response);
-	}
+		}
+		
+		request.setAttribute("message", message);
+		
+	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connection/register.jsp");
+	rd.forward(request, response);
 
-}
+	}
 }

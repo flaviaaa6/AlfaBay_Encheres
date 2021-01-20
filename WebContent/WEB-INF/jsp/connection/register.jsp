@@ -51,18 +51,25 @@
                 <div class="col-3 p-2">
                     <img class="small-icon" src="images/error.svg">
                 </div>
-            
-                <ul class="col-9 list-unstyled p-2">
-                    <li>un message d'erreur éventuellement !</li>
-                    <li>un autre message....</li>
-                </ul>
+             <c:if test="${!empty message }">
+			 	<p class="col-9 list-unstyled p-2">${message};
+			 	</p>
+			</c:if>
+            <c:if test="${!empty erreurs }">
+			 	<ul class="col-9 list-unstyled p-2">
+			 		<c:forEach items="${erreurs }" var="erreur">
+			 			<li>${erreur }</li>
+			 		</c:forEach>
+			 	</ul>
+			</c:if>
+                
             </div>            
             <!--formulaire-->
             <form class="form-register needs-validation" action="${pageContext.request.contextPath}/inscription" method="post" novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="pseudo">Pseudo</label>
-                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="" maxlength="30" required value="">
+                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="" maxlength="30" required value="${utilisateurCnx.pseudo }">
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
@@ -70,7 +77,7 @@
                 
                     <div class="col-md-6 mb-3">
                         <label for="lastname">Nom</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" value="" maxlength="30" required>
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" value="${utilisateurCnx.nom }" maxlength="30" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
@@ -80,7 +87,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstname">Prénom</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" value="" maxlength="30" required>
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" value="${utilisateurCnx.prenom }" maxlength="30" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
@@ -88,7 +95,7 @@
                 
                     <div class="col-md-6 mb-3">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="" maxlength="20" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="${utilisateurCnx.email }" maxlength="20" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
@@ -98,11 +105,11 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="phone">Téléphone <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="" maxlength="15">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="" value="${utilisateurCnx.telephone }" maxlength="15">
                     </div>
                     <div class="col-md-8 mb-3">
                         <label for="street">Rue</label>
-                        <input type="text" class="form-control" id="street" name="street" placeholder="" value="" maxlength="30" required>
+                        <input type="text" class="form-control" id="street" name="street" placeholder="" value="${utilisateurCnx.rue }" maxlength="30" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
@@ -112,14 +119,14 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="zipcode">Code postal</label>
-                        <input type="number" class="form-control" id="zipcode" name="zipcode" placeholder="" min="01000" max="99999" value="" required>
+                        <input type="number" class="form-control" id="zipcode" name="zipcode" placeholder="" min="01000" max="99999" value="${utilisateurCnx.codePostal }" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
                     </div>
                     <div class="col-md-8 mb-3">
                         <label for="city">Ville</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="" maxlength="30" value="" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="" maxlength="30" value="${utilisateurCnx.ville }" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>
