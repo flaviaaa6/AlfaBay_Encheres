@@ -67,8 +67,11 @@ public class ServletInscrire extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("utilisateurCnx", utilisateurConnecte);
-		doGet(request, response);
-	}
+			
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
+		rd.forward(request, response);
+		
+		}
 
-}
+	}
 }
