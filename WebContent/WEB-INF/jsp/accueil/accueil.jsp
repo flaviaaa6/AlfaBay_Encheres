@@ -26,16 +26,21 @@
 	<h1>AlfaBay ENCHERES</h1>
 	<h2>Liste des enchères</h2>
 
-	<c:if test="">
-	
+		
+		<c:if test="${empty sessionScope.utilisateurCnx.pseudo}">
+		<a href="${pageContext.request.contextPath}/connect"><input type="button" value="Se connecter"/></a>
+		 <a href="${pageContext.request.contextPath}/inscription"><input type="button" value="S'inscrire"/></a>
 	</c:if>
-	<a href="${pageContext.request.contextPath }/connect">${empty sessionScope.utilisateurCnx.pseudo ? "Se connecter" : "Se déconnecter"} </a>
 	
+		
 	<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
 		<p>Bienvenue ${utilisateurCnx.pseudo}</p>
+		
+		
+		<a href="${pageContext.request.contextPath}/deconnect"><input type="button" value="Se déconnecter"/></a>
+		
 	</c:if>
 	
-	<a href="${pageContext.request.contextPath }/inscription">S'inscrire</a>
-	
+
 </body>
 </html>
