@@ -28,12 +28,7 @@ public class ConnectionManager {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			exception.ajouterErreur(e.getMessage());
-		}
-		try {
-			validerTelephone(codePostal);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			exception.ajouterErreur(e.getMessage());
+		
 		}
 		try {
 			validerMotdePasse(motDePasse, confirmMotDePasse);
@@ -56,6 +51,8 @@ public class ConnectionManager {
 		//si les données sont validées
 		if (!exception.hasErreurs()) {
 			nouvelUtilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			nouvelUtilisateur.setCredit(100);
+			nouvelUtilisateur.setAdministrateur(false);
 			try {
 				utilisateurInsere = dao.insert(nouvelUtilisateur);
 			} catch (Exception e) {
@@ -81,13 +78,6 @@ public class ConnectionManager {
 		}
 	}
 	
-	private void validerTelephone(String telephone) throws Exception {
-		if (telephone.trim().length() != 10) {
-			
-			Exception e = new Exception("Le telephone doit contenir 10 caracteres !");
-			throw e;
-		}
-	}
 	
 	private void validerMotdePasse(String motdePasse, String confirmMotDePasse ) throws Exception {
 		if (motdePasse == null || motdePasse.trim().length()<8 || confirmMotDePasse == null || confirmMotDePasse.trim().length() < 8) {

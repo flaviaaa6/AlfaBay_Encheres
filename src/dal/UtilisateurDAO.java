@@ -4,17 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import bo.Utilisateur;
+import exceptions.BuisnessException;
 
 public class UtilisateurDAO {
 	
 	private static final String SELECT = "SELECT * FROM UTILISATEURS WHERE  pseudo = ? AND mot_de_passe = ? ";
-	private static final String INSERT = " INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe)" +
-							" VALUES (?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT = " INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)" +
+							" VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
 	Utilisateur utilisateurCnx;
 	
@@ -75,19 +73,22 @@ public class UtilisateurDAO {
 			pstmt.setString(7, utilisateur.getCodePostal());
 			pstmt.setString(8, utilisateur.getVille());
 			pstmt.setString(9, utilisateur.getMotDePasse());
+			pstmt.setInt(10, utilisateur.getCredit());
+			pstmt.setBoolean(11, utilisateur.isAdministrateur());
 			
 			pstmt.executeUpdate();
 			rs = pstmt.getGeneratedKeys();
 			
 			if(rs.next()){
 				utilisateur.setNoUtilisateur(rs.getInt(1));
-				utilisateur.setCredit(0);
-				utilisateur.setAdministrateur(false);
+
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			throw new Exception("Problème d'insertion de l'utilisateur dans la base. Cause : " + e.getMessage());
+			BuisnessException be = new BuisnessException();
+			be.ajouterErreur("Problème d'insertion de l'utilisateur dans la base. Cause :" + e.getMessage());
+			throw e;
+		//	}			throw new Exception("Problème d'insertion de l'utilisateur dans la base. Cause : " + e.getMessage());
 		}
 
 		return utilisateur;
