@@ -1,5 +1,7 @@
 package bo;
 
+import java.util.List;
+
 public class Utilisateur {
 	
 	private int noUtilisateur;
@@ -14,6 +16,20 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	private List<ArticleVendu> listeArticles;
+	
+	/**
+	 * @return the listeArticles
+	 */
+	public List<ArticleVendu> getListeArticles() {
+		return listeArticles;
+	}
+	/**
+	 * @param listeArticles the listeArticles to set
+	 */
+	public void setListeArticles(List<ArticleVendu> listeArticles) {
+		this.listeArticles = listeArticles;
+	}
 	/**
 	 * @return the noUtilisateur
 	 */
@@ -205,7 +221,9 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
+	
 	/**
+	 * @param noUtilisateur
 	 * @param pseudo
 	 * @param nom
 	 * @param prenom
@@ -215,10 +233,15 @@ public class Utilisateur {
 	 * @param codePostal
 	 * @param ville
 	 * @param motDePasse
+	 * @param credit
+	 * @param administrateur
+	 * @param listeArticles
 	 */
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) {
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
+			List<ArticleVendu> listeArticles) {
 		super();
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -228,6 +251,9 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
+		this.credit = credit;
+		this.administrateur = administrateur;
+		this.listeArticles = listeArticles;
 	}
 	
 	
