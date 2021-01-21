@@ -26,8 +26,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <body>
 
 <%-- -----------------VERSION PLEIN ECRAN ORDINATEUR----------------- --%>
-	 
-<%-- -----------------ACCUEIL UTILISATEUR NON CONNECTE----------------- --%>   
+
 <div class="container-fluid">
 
 <header>
@@ -40,7 +39,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 		   </a>
 		
 		
-<!-- LISTE DEROULANTE POUR PETIT ECRAN -->		
+<!-- ENTETE POUR PETIT ECRAN -->		
 	<ul class="navbar-nav ml-auto">
 	    <li class="nav-item dropdown d-lg-none">
 	    
@@ -70,7 +69,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	        </div>
 	    </li>  
 	    
-<!-- LISTE DEROULANTE POUR ECRAN MOYEN-->	
+<!-- ENTETE POUR ECRAN MOYEN-->	
 
 		<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
        		<img class="small-icon" src="images/user.png">
@@ -114,7 +113,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                                 <label for="filter-input">Filtre</label>
-                                <input type="text" class="form-control" id="filter-input" name="q" placeholder="articles contenant...">
+                                <input type="text" class="form-control" id="filter-input" name="q" placeholder="Rechercher un article">
                         </div>
                         <div class="form-group">
                             <label for="categories-select">Catégories</label>
@@ -128,6 +127,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                         </div>
                     </div>
                     <!--Partie droite-->
+                    <c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
                     <div class="col-md-6 mb-3">  	
                         <div class="form-check">
                             <label class="form-check-label">
@@ -175,10 +175,13 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                         </div>
 
                     </div>
+                  </c:if>
                 </div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">
-                	<img class="small-icon" src="images/search.png" alt="Eni Ecole">
+                <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-primary btn-lg" type="submit">
+                	<img class="small-icon" src="images/search.png" alt="AlphaBay_Encheres">
                 </button>
+                </div>
             </form>
 
             <!--enchères-->
