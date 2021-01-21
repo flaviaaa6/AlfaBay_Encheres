@@ -10,10 +10,11 @@ public class ArticleVendu {
 	private String description;                  
 	private LocalDateTime dateDebutEnchere;        
 	private LocalDateTime dateFinEnchere;              
-	private int miseAPrixl;                 
+	private int miseAPrix;                 
 	private int prixVente;   
 	private String etatVente;
-	
+	private Utilisateur noUtilisateur;                
+	private Categorie noCategorie;
 	
 	
 	/**
@@ -22,8 +23,7 @@ public class ArticleVendu {
 	public ArticleVendu() {
 		super();
 	}
-	private Utilisateur noUtilisateur;                
-	private Categorie noCategorie;
+	
 
 
 
@@ -40,14 +40,14 @@ public class ArticleVendu {
 	 * @param noCategorie
 	 */
 	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
-			LocalDateTime dateFinEnchere, int miseAPrixl, int prixVente, String etatVente, Utilisateur noUtilisateur,
+			LocalDateTime dateFinEnchere, int miseAPrix, int prixVente, String etatVente, Utilisateur noUtilisateur,
 			Categorie noCategorie) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
 		this.dateFinEnchere = dateFinEnchere;
-		this.miseAPrixl = miseAPrixl;
+		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 		this.noUtilisateur = noUtilisateur;
@@ -149,8 +149,8 @@ public class ArticleVendu {
 	/**
 	 * @return the miseAPrixl
 	 */
-	public int getMiseAPrixl() {
-		return miseAPrixl;
+	public int getMiseAPrix() {
+		return miseAPrix;
 	}
 
 
@@ -158,8 +158,8 @@ public class ArticleVendu {
 	/**
 	 * @param miseAPrixl the miseAPrixl to set
 	 */
-	public void setMiseAPrixl(int miseAPrixl) {
-		this.miseAPrixl = miseAPrixl;
+	public void setMiseAPrix(int miseAPrix) {
+		this.miseAPrix = miseAPrix;
 	}
 
 
