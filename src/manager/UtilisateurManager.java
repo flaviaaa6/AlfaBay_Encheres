@@ -4,7 +4,7 @@ import dal.UtilisateurDAO;
 import exceptions.BuisnessException;
 
 
-public class ConnectionManager {
+public class UtilisateurManager {
 
 	UtilisateurDAO dao = new UtilisateurDAO();
 	Utilisateur utilisateurCnx = new Utilisateur();
