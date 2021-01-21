@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import bo.Utilisateur;
 import exceptions.BuisnessException;
-import manager.ConnectionManager;
+import manager.UtilisateurManager;
 
 /**
  * Servlet implementation class ServletInscrire
@@ -55,7 +55,7 @@ public class ServletInscrire extends HttpServlet {
 		String motDePasse = request.getParameter("password");
 		String confirmMotDePasse = request.getParameter("confirm_password");
 		
-		ConnectionManager mgr = new ConnectionManager();
+		UtilisateurManager mgr = new UtilisateurManager();
 		try {
 			utilisateurConnecte = mgr.inscrire(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmMotDePasse);
 		} catch (BuisnessException e) {

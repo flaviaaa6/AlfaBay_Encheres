@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bo.Utilisateur;
-import manager.ConnectionManager;
+import manager.UtilisateurManager;
 
 /**
  * Servlet implementation class ServletConnection
@@ -49,7 +49,7 @@ public class ServletConnection extends HttpServlet {
 		
 		Utilisateur utilisateurCnx = null;
 		
-		ConnectionManager mgr = new ConnectionManager();
+		UtilisateurManager mgr = new UtilisateurManager();
 		try {
 			utilisateurCnx = mgr.verifier(utilisateur);
 		} catch (Exception e) {
