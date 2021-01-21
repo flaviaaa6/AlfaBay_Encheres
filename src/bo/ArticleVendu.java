@@ -56,6 +56,49 @@ public class ArticleVendu {
 
 
 
+	
+
+
+
+
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEnchere
+	 * @param dateFinEnchere
+	 * @param miseAPrix
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int miseAPrix, Categorie noCategorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+		this.noCategorie = noCategorie;
+	}
+
+	/**
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEnchere
+	 * @param dateFinEnchere
+	 * @param miseAPrix
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int miseAPrix) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+	
+	}
+
+
+
 	/**
 	 * @return the noArticle
 	 */

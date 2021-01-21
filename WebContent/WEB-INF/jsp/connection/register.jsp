@@ -34,7 +34,7 @@
                 </a>
                 <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="images/user.svg">
-                    <span class="align-middle text-muted">XXXXX xxx, 0 crédit(s)</span>
+                    <span class="align-middle text-muted">Bienvenue ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
                 </a>
             </nav>
         </header>
@@ -51,18 +51,19 @@
                 <div class="col-3 p-2">
                     <img class="small-icon" src="images/error.svg">
                 </div>
-             <c:if test="${!empty message }">
-			 	<p class="col-9 list-unstyled p-2">${message};
-			 	</p>
-			</c:if>
-            <c:if test="${!empty erreurs }">
-			 	<ul class="col-9 list-unstyled p-2">
-			 		<c:forEach items="${erreurs }" var="erreur">
-			 			<li>${erreur }</li>
-			 		</c:forEach>
-			 	</ul>
-			</c:if>
-                
+                <div>
+		             <c:if test="${!empty message }">
+					 	<p class="col-9 list-unstyled p-2">${message};
+					 	</p>
+					</c:if>
+		            <c:if test="${!empty erreurs }">
+					 	<ul class="col-9 list-unstyled p-2">
+					 		<c:forEach items="${erreurs }" var="erreur">
+					 			<li>${erreur }</li>
+					 		</c:forEach>
+					 	</ul>
+					</c:if>
+               </div> 
             </div>            
             <!--formulaire-->
             <form class="form-register needs-validation" action="${pageContext.request.contextPath}/inscription" method="post" novalidate>
