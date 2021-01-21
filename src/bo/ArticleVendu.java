@@ -174,18 +174,4 @@ public void setId_article(int id_article) {
 		this.image = image;
 	}
 	
-//LISTE DES VENTES	
-	/**@return the listeDesVentes*/
-	public List<ArticleVendu> getListeDesVentes() {
-		return ListeDesVentes;
-	}
-	/**@param listeDesVentes the listeDesVentes to set*/
-	public void setListeDesVentes(List<ArticleVendu> listeDesVentes) {
-		ListeDesVentes = listeDesVentes;
-	}
-
-
-	
-	
-	
 }
