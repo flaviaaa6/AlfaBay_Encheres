@@ -41,8 +41,8 @@
 						Encheres</strong>
 				</a> <a class="navbar-brand" href="#" alt="Gérer mon profil"
 					title="Gérer mon profil"> <img class="small-icon"
-					src="images/user.svg"> <span class="align-middle text-muted">${utilisateurCnx.nom },
-						${utilisateurCnx.credit }</span>
+					src="images/user.svg"> <span class="align-middle text-muted">${utilisateurCnx.pseudo },
+						crédit : ${utilisateurCnx.credit } </span>
 				</a>
 			</nav>
 		</header>
@@ -111,14 +111,11 @@
 							</div>
 							<div class="col-md-9 mb-3">
 								<select name="categorie" id="categorie">
-
-									<option disabled>choisissez une option</option>
-									<option value="maison">maison</option>
-									<option value="jardin">jardin</option>
-									<option value="bricolage">bricolage</option>
-									<option value="jouet">jouet</option>
-									<option value="sport">sport</option>
-									<option value="technologie">technologie</option>
+									<c:if test="${!empty categories }">
+									 		<c:forEach items="${categories }" var="categ">
+									 			<option value="${ categ.noCategorie}; ${ categ.libelle}">${ categ.libelle}</option>
+									 		</c:forEach>									 	
+									</c:if>
 								</select>
 								<div class="invalid-feedback">Ce champ est invalide !</div>
 							</div>

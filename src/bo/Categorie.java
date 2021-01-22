@@ -6,7 +6,8 @@ public class Categorie {
 	
 	private int noCategorie;
 	private String libelle;
-	private List<ArticleVendu> listeArticles;
+	
+	
 	/**
 	 * @return the noCategorie
 	 */
@@ -32,17 +33,7 @@ public class Categorie {
 		this.libelle = libelle;
 	}
 	/**
-	 * @return the listeArticles
-	 */
-	public List<ArticleVendu> getListeArticles() {
-		return listeArticles;
-	}
-	/**
-	 * @param listeArticles the listeArticles to set
-	 */
-	public void setListeArticles(List<ArticleVendu> listeArticles) {
-		this.listeArticles = listeArticles;
-	}
+	
 	
 	/**
 	 * 
@@ -56,11 +47,11 @@ public class Categorie {
 	 * @param libelle
 	 * @param listeArticles
 	 */
-	public Categorie(int noCategorie, String libelle, List<ArticleVendu> listeArticles) {
+	public Categorie(int noCategorie, String libelle) {
 		super();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
-		this.listeArticles = listeArticles;
+		
 	}
 	/**
 	 * @param libelle

@@ -12,8 +12,8 @@ import exceptions.BuisnessException;
 
 public class ArticleVenduDAO {
 	
-	private static final String INSERT = " INSERT INTO ARTICLES_VENDUES (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, no_categorie)" +
-			" VALUES (?,?,?,?,?,?)";
+	private static final String INSERT = " INSERT INTO ARTICLES_VENDUES (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, no_categorie, no_utilisateur)" +
+			" VALUES (?,?,?,?,?,?,?)";
 	
 	public ArticleVendu insert(ArticleVendu article) throws SQLException {
 		
@@ -30,7 +30,8 @@ public class ArticleVenduDAO {
 				pstmt.setTimestamp(3, Timestamp.valueOf(article.getDateDebutEnchere()));
 				pstmt.setTimestamp(4, Timestamp.valueOf(article.getDateFinEnchere()));
 				pstmt.setInt(5, article.getMiseAPrix());
-			//	pstmt.setInt(6, article.getNoCategorie());
+				pstmt.setInt(6, article.getCategorie().getNoCategorie());
+				pstmt.setInt(7,article.getUtilisateur().getNoUtilisateur());
 				
 			//	LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime())
 				
