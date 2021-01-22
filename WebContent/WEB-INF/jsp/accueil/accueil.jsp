@@ -55,7 +55,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 			       	<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
 			       	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			       	<a class="dropdown-item" href="#">Administrer</a> 
-	            	<a class="dropdown-item" href="#">Vendre un article</a>
+	            	<a class="dropdown-item" href="${pageContext.request.contextPath}/vente/add">Vendre un article</a>
 			       	<a class="dropdown-item" href="${pageContext.request.contextPath}/profil" title="Gérer mon profil">Gérer mon profil</a>
 			       	<a class="dropdown-item" href="${pageContext.request.contextPath}/deconnect">Se déconnecter</a>
 				</c:if>
@@ -76,7 +76,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
        		<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
        		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
        		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="#">Administrer</a></li> 
-       		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="#">Vendre un article</a></li>
+       		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/vente/add"">Vendre un article</a></li>
 	  		<a class="nav-link" href="${pageContext.request.contextPath}/profil">Gérer mon profil</a>
 	  		<a class="nav-link" href="${pageContext.request.contextPath}/deconnect">Se déconnecter</a>
 	     </c:if> 
