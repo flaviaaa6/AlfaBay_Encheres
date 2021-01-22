@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import bo.ArticleVendu;
 import bo.Utilisateur;
@@ -14,7 +18,20 @@ public class ArticleVenduDAO {
 	
 	private static final String INSERT = " INSERT INTO ARTICLES_VENDUES (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, no_categorie, no_utilisateur)" +
 			" VALUES (?,?,?,?,?,?,?)";
-	
+	private static final String SELECT =" SELECT " + 
+			
+			"	no_article," + 
+			"	nom_article," +
+			"	prix_initial," +
+			"	date_fin_enchere," + 
+			"	no_utilisateur," + 
+			"	pseudo" + 
+			"	FROM ARTICLES_VENDUS "; 
+			//"	INNER JOIN  ENCHERES e ON e.a.no_article=a.no_article" +
+			//"	INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur" +
+			//"	ORDER BY date_fin_enchere desc";	
+
+
 	public ArticleVendu insert(ArticleVendu article) throws SQLException {
 		
 		
@@ -54,4 +71,31 @@ public class ArticleVenduDAO {
 		}
 	
 
+
+	public List<ArticleVendu> select() throws Exception {
+		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
+		ArticleVendu articleVendu = new ArticleVendu();
+
+		try(Connection cnx = ConnectionProvider.getConnection())
+		{
+			Statement stmt = cnx.createStatement();
+			ResultSet rs = stmt.executeQuery(SELECT);
+			while(rs.next())
+			{
+				articleVendu.setNomArticle(rs.getString("nom_article"));
+				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
+				articleVendu.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()), rs.getTime("date_fin_enchere").toLocalTime()));
+				//enchereLu.setPseudo(rs.getString("pseudo"));
+
+				listeArticlesVendus.add(articleVendu);	
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+
+			throw e;
+		}
+		return listeArticlesVendus;
+	}
 }

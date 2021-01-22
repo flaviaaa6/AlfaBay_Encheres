@@ -2,6 +2,8 @@ package manager;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import bo.ArticleVendu;
 import bo.Categorie;
@@ -11,6 +13,9 @@ import exceptions.BuisnessException;
 
 public class ArticleVenduManager {
 	BuisnessException exception = new BuisnessException();
+	private ArticleVenduDAO dao;
+	List<ArticleVendu> listearticle = new ArrayList<ArticleVendu>();
+	
 	
 	//methode pour inserer un article
 	public ArticleVendu insereArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, Categorie categorie,Utilisateur utilisateur ) throws SQLException {
@@ -19,7 +24,7 @@ public class ArticleVenduManager {
 		ArticleVendu article = new ArticleVendu(nom, description,  dateDebut, dateFin, prixInit, utilisateur, categorie);
 		
 		//envoi a la dal:
-		ArticleVenduDAO dao = new ArticleVenduDAO();
+		dao = new ArticleVenduDAO();
 		
 		
 		article = dao.insert(article);
@@ -27,6 +32,15 @@ public class ArticleVenduManager {
 			
 		return article;
 	
+	}
+
+	
+
+	public List<ArticleVendu> select() throws Exception
+	{
+	listearticle = dao.select();
+	
+		return listearticle;
 	}
 
 }
