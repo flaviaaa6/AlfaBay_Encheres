@@ -29,6 +29,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 
 <div class="container-fluid">
 
+
 <header>
 <!-- VERSION GRAND ECRAN-->
     <nav class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
@@ -52,7 +53,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	        
 	            <c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
 			       	<img class="small-icon" src="images/user.png">
-			       	<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
+			       	<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, 0 crédit(s)</span>
 			       	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			       	<a class="dropdown-item" href="#">Administrer</a> 
 	            	<a class="dropdown-item" href="${pageContext.request.contextPath}/vente/add">Vendre un article</a>
@@ -73,10 +74,10 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 
 		<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
        		<img class="small-icon" src="images/user.png">
-       		<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
+       		<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, 0 crédit(s)</span>
        		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
        		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="#">Administrer</a></li> 
-       		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/vente/add"">Vendre un article</a></li>
+       		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/vente/add">Vendre un article</a></li>
 	  		<a class="nav-link" href="${pageContext.request.contextPath}/profil">Gérer mon profil</a>
 	  		<a class="nav-link" href="${pageContext.request.contextPath}/deconnect">Se déconnecter</a>
 	     </c:if> 
@@ -184,30 +185,40 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                 </div>
             </form>
 
-            <!--enchères-->
-            <div class="row justify-content-center border-top card-deck">
-                <div class="col-12 col-sm-6 p-2" >
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h4 class="my-0 font-weight-normal">Article 1</h4>
-                        </div>
-                        <div class="d-flex">
-                            <div class="col-3 p-2">
-                                <img class="img-fluid img-thumbnail" src="images/photo.png" alt="pas de photo" />
-                            </div>
-                            <ul class="col-9 list-unstyled p-2">
-                                <li>Prix : 0 point(s)</li>
-                                <li>Meilleure enchère : 0 point(s)</li>
-                                <li>Fin de l'enchère : dd-MM-yyyy HH:mm</li>
-                                <li>Vendeur : xxxxxxxxx</li>
-                            </ul>
-                        </div>
-                        <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
-                            <img class="small-icon" src="images/bid.png">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 p-2" >
+			<!--enchères-->
+			<c:if test="${!empty listeArticlesVendus }">
+				<c:forEach items="${listeArticlesVendus}" var="articleVendu">
+					<div class="row justify-content-center border-top card-deck">
+						<div class="col-12 col-sm-6 p-2">
+							<div class="card">
+								<div class="card-header text-center">
+
+									<h4 class="my-0 font-weight-normal">Article
+										:"${articleVendu.nomArticle}"</h4>
+								</div>
+								<div class="d-flex">
+									<div class="col-3 p-2">
+										<img class="img-fluid img-thumbnail" src="images/photo.png"
+											alt="pas de photo" />
+									</div>
+									<ul class="col-9 list-unstyled p-2">
+										<li>Prix :"${articleVendu.miseAPrix}"</li>
+										<li>Meilleure enchère : 0 point(s)</li>
+										<li>Fin de l'enchère :"${articleVendu.dateFinEnchere}"</li>
+										<%--<li>$articleVendu.pseudo</li> --%>
+									</ul>
+								</div>
+								<a class="mt-3 btn btn-lg btn-block btn-primary" href="#"
+									title="faire une enchère"> <img class="small-icon"
+									src="images/bid.png">
+								</a>
+
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
+			<%-- <div class="col-12 col-sm-6 p-2" >
                     <div class="card">
                         <div class="card-header text-center">
                             <h4 class="my-0 font-weight-normal">Article 2</h4>
@@ -247,7 +258,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                     <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
                         <img class="small-icon" src="images/bid.png">
                     </a>
-                </div>
+                </div>--%>
 	        </div>
         </main>
 

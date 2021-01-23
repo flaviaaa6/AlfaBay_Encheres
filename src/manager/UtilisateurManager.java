@@ -1,4 +1,5 @@
 package manager;
+
 import bo.Utilisateur;
 import dal.UtilisateurDAO;
 import exceptions.BuisnessException;
@@ -8,6 +9,8 @@ public class UtilisateurManager {
 
 	UtilisateurDAO dao = new UtilisateurDAO();
 	Utilisateur utilisateurCnx = new Utilisateur();
+	Utilisateur utilisateurModifie;
+	BuisnessException exception = new BuisnessException();
 	
 	public Utilisateur verifier(Utilisateur utilisateur) throws Exception {
 	
@@ -17,10 +20,63 @@ public class UtilisateurManager {
 		
 	}
 	
-	public Utilisateur inscrire(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, String confirmMotDePasse) throws BuisnessException {
+	public Utilisateur update(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, String confirmMotDePasse) throws BuisnessException {
+		
+		
+		try {
+			validerCodePostal(codePostal);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			exception.ajouterErreur(e.getMessage());
+		
+		}
+		try {
+			validerMotdePasse(motDePasse, confirmMotDePasse);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			exception.ajouterErreur(e.getMessage());
+		}
+		try {
+			validerPseudo(pseudo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			exception.ajouterErreur(e.getMessage());
+		}
+		try {
+			validerEmail(email);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			exception.ajouterErreur(e.getMessage());
+		}
+		//si les données sont validées
+		if (!exception.hasErreurs()) {
+			utilisateurModifie = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			utilisateurModifie.setCredit(100);
+			utilisateurModifie.setAdministrateur(false);
+			try {
+				utilisateurCnx = dao.update(utilisateurModifie);
+			} catch (Exception e) {
+				exception.ajouterErreur(e.getMessage());
+			} 
+			
+		}
+				
+		//si des erreurs ont été détectées
+		if (exception.hasErreurs()) {
+			//propager la BuisnessException à la servlet
+			throw exception;
+		}
+		
+		return utilisateurCnx;
+	}
+	
+	
+	public Utilisateur inscrire(String pseudo, String nom, String prenom, String email, 
+			String telephone, String rue, String codePostal, String ville, String motDePasse, 
+			String confirmMotDePasse) throws BuisnessException {
 		
 		Utilisateur utilisateurInsere = null;
-		BuisnessException exception = new BuisnessException();
 		Utilisateur nouvelUtilisateur;
 		
 		try {
@@ -105,4 +161,21 @@ public class UtilisateurManager {
 			throw e;
 		}
 	}
+	
+	/*	
+	public Utilisateur selectById(int id) throws BuisnessException { 
+		
+		return this.utilisateurCnx;
+	}
+*/
+	public Utilisateur trouver(int id) throws BuisnessException {
+		
+		
+		Utilisateur utilisateur = null;
+		
+		
+		return utilisateur;
+		
+	}
+
 }

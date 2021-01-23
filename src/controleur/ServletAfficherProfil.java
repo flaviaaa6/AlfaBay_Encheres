@@ -1,7 +1,6 @@
 package controleur;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bo.ArticleVendu;
-import manager.ArticleVenduManager;
-
 /**
- * Servlet implementation class ServletAccueillir
+ * Servlet implementation class ServletAfficherProfil
  */
-@WebServlet("/accueil")
-public class ServletAccueillir extends HttpServlet {
+@WebServlet("/affichage")
+public class ServletAfficherProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAccueillir() {
+    public ServletAfficherProfil() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +29,7 @@ public class ServletAccueillir extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArticleVenduManager mgr = new ArticleVenduManager();
-		List<ArticleVendu> listeArticlesVendus = null;
-		
-			try { listeArticlesVendus = mgr.select();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("listeArticlesVendus", listeArticlesVendus);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/profil/afficherProfil.jsp");
 		rd.forward(request, response);
 	}
 
