@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,7 +29,7 @@ import manager.CategorieManager;
 @WebServlet("/vente/add")
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       private final String DATEFORMAT = "yyyy-MM-dd'T'HH:mm";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -72,10 +73,16 @@ public class ServletNouvelleVente extends HttpServlet {
 		//les dates
 		LocalDateTime dateDebut = null; 
 		LocalDateTime dateFin= null;
+		
 		try
-		{
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm");
-			dateDebut = LocalDateTime.parse(request.getParameter("dateDebutEnchereStr"),dtf);
+	{
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATEFORMAT);
+			dateDebut = LocalDateTime.parse(dateDebutEnchereStr, dtf);
+			
+			DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyy");
+			System.out.println("TOTO !!!!!!!!" + dateDebut.format(formatter2));
+
+			
 		}
 		catch(DateTimeParseException e)
 		{
@@ -83,8 +90,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		try
 		{
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm");
-			dateFin = LocalDateTime.parse(request.getParameter("dateFinEnchereStr"),dtf);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATEFORMAT);
+			dateFin = LocalDateTime.parse(dateFinEnchereStr,dtf);
 		}
 		catch(DateTimeParseException e)
 		{
@@ -129,7 +136,7 @@ public class ServletNouvelleVente extends HttpServlet {
 			
 			request.setAttribute("message", message);
 			
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ventearticle/nouvellevente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ventearticles/nouvellevente.jsp");
 		rd.forward(request, response);
 
 		

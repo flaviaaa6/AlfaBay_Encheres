@@ -147,7 +147,7 @@
 								<label for="dateDebutEnchere">Début de l'enchère :</label>
 							</div>
 							<div class="col-md-9 mb-3">
-								<input type="date" class="form-control" id="dateDebutEnchere"
+								<input type="datetime-local" class="form-control" id="dateDebutEnchere"
 									name="dateDebutEnchere" placeholder="" value="" required>
 								<div class="invalid-feedback">Ce champ est invalide !</div>
 							</div>
@@ -160,7 +160,7 @@
 								<label for="dateFinEnchere">Fin de l'enchère :</label>
 							</div>
 							<div class="col-md-9 mb-3">
-								<input type="date" class="form-control" id="dateFinEnchere"
+								<input type="datetime-local" class="form-control" id="dateFinEnchere"
 									name="dateFinEnchere" placeholder="" value="" required>
 								<div class="invalid-feedback">Ce champ est invalide !</div>
 
