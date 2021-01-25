@@ -7,6 +7,7 @@ import java.util.List;
 
 import bo.ArticleVendu;
 import bo.Categorie;
+import bo.Retrait;
 import bo.Utilisateur;
 import dal.ArticleVenduDAO;
 import exceptions.BuisnessException;
@@ -18,7 +19,8 @@ public class ArticleVenduManager {
 	
 	
 	//methode pour inserer un article
-	public ArticleVendu insereArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, int prixInit, Categorie categorie,Utilisateur utilisateur ) throws SQLException {
+	public ArticleVendu insereArticle(String nom, String description, LocalDateTime dateDebut, LocalDateTime dateFin, 
+			int prixInit, Categorie categorie,Utilisateur utilisateur ) throws SQLException {
 		
 		//creation de l'objet article:
 		ArticleVendu article = new ArticleVendu(nom, description,  dateDebut, dateFin, prixInit, utilisateur, categorie);

@@ -16,7 +16,8 @@ import exceptions.BuisnessException;
 
 public class ArticleVenduDAO {
 	
-	private static final String INSERT = " INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, no_categorie, no_utilisateur)" +
+	private static final String INSERT = " INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_enchere,"
+			+ " date_fin_enchere, prix_initial, no_categorie, no_utilisateur)" +
 			" VALUES (?,?,?,?,?,?,?)";
 	private static final String SELECT =" SELECT " + 
 			

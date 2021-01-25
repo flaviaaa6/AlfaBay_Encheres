@@ -2,7 +2,6 @@ package controleur;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,10 +17,12 @@ import javax.servlet.http.HttpSession;
 
 import bo.ArticleVendu;
 import bo.Categorie;
+import bo.Retrait;
 import bo.Utilisateur;
 import exceptions.BuisnessException;
 import manager.ArticleVenduManager;
 import manager.CategorieManager;
+import manager.RetraitManager;
 
 /**
  * Servlet implementation class NouvelleVente
@@ -67,6 +68,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String ville = request.getParameter("ville");
 		ArticleVendu articleAVendre = null;
 		String message = null;
+		BuisnessException be = new BuisnessException();
 		
 		//convertir les données :
 		
@@ -114,6 +116,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Utilisateur utilisateurCnx = (Utilisateur) session.getAttribute("utilisateurCnx");
+		
+		
 				
 		//appel au manager, envoi des données pour créer un nouvel article
 		
@@ -123,15 +127,35 @@ public class ServletNouvelleVente extends HttpServlet {
 			try {
 				articleAVendre = mgr.insereArticle(nom,description,dateDebut,dateFin,prixInitial, categ, utilisateurCnx);
 			} catch (SQLException e) {
-				BuisnessException be = new BuisnessException();
+				be = new BuisnessException();
 				request.setAttribute("erreurs", be.getListeMessagesErreur());
 				message = "Erreur, l'utilisateur n'a pas été ajouté !";
+				
 			}
 		
 			if (articleAVendre != null) {
 				message = "article enregistré";
 				
 				
+			}
+			
+			//creation du retrait
+			
+			Retrait retrait = new Retrait();
+			retrait.setId_article(articleAVendre.getNoArticle());
+			retrait.setRue(rue);
+			retrait.setCodePostal(codePostal);
+			retrait.setVille(ville);
+			
+			// envoi du retrait en base de donnée
+			
+			RetraitManager retraitmgr = new RetraitManager();
+			try {
+				retraitmgr.insereretrait(retrait);
+			} catch (SQLException e) {
+				be = new BuisnessException();
+				request.setAttribute("erreurs", be.getListeMessagesErreur());
+				message = "Erreur, le retrait n'a pas été ajouté !";
 			}
 			
 			request.setAttribute("message", message);

@@ -18,6 +18,7 @@ public class ArticleVendu {
 	
 	
 	
+	
 	/**
 	 * Constructeur par défaut
 	 */
@@ -53,6 +54,7 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
+		
 	}
 
 

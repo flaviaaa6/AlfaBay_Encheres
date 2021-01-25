@@ -29,11 +29,11 @@
             <nav class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
                 <!-- Brand/logo -->
                 <a class="navbar-brand" href="index.html">
-                    <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
+                    <img class="small-icon" src="images/trocenchere.png" alt="Accueil ENI-Encheres">
                     <strong>AlfaBay_Encheres</strong>
                 </a>
                 <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
-                    <img class="small-icon" src="images/user.svg">
+                    <img class="small-icon" src="images/user.png">
                     <span class="align-middle text-muted">Bienvenue ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
                 </a>
             </nav>
@@ -44,12 +44,12 @@
             <!--title-->
             <div class="mx-auto text-center">
                 <h1>Inscription</h1>
-                <img class="mb-4 large-icon rounded-circle" src="images/user.svg" alt="">
+                <img class="mb-4 large-icon rounded-circle" src="images/user.png" alt="">
             </div>
             <!--erreur-->
             <div class="d-flex alert-danger">
                 <div class="col-3 p-2">
-                    <img class="small-icon" src="images/error.svg">
+                    <img class="small-icon" src="images/error.png">
                 </div>
                 <div>
 		             <c:if test="${!empty message }">
