@@ -58,26 +58,25 @@ public class ServletModifierProfil extends HttpServlet {
 		String motDePasse = request.getParameter("password");
 		String confirmMotDePasse = request.getParameter("confirm_password");
 		
+		HttpSession session = request.getSession();
+		Utilisateur utilisateurCnxSession = (Utilisateur) session.getAttribute("utilisateurCnx");
 		UtilisateurManager mgr = new UtilisateurManager();
 		
 		try {
-			utilisateurCnx = mgr.update(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmMotDePasse);
+			utilisateurCnx = mgr.update(utilisateurCnxSession.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmMotDePasse);
 		} catch (BuisnessException e) {
 			request.setAttribute("erreurs", e.getListeMessagesErreur());
 			message = "Erreur, la modification n'a pas été effectuée !";
 		}
 		
-		System.out.println(utilisateurCnx);
-		
 		if (utilisateurCnx != null) {
 			message = "La modification est terminée avec succès!";
-			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurCnx", utilisateurCnx);
 		}
 		
 		request.setAttribute("message", message);
 		
-	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil/afficherProfil.jsp");
+	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ventearticles/nouvellevente.jsp");
 	rd.forward(request, response);
 	}
 

@@ -20,7 +20,7 @@ public class UtilisateurManager {
 		
 	}
 	
-	public Utilisateur update(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur update(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmMotDePasse) throws BuisnessException {
 		
 		
@@ -49,17 +49,18 @@ public class UtilisateurManager {
 			// TODO Auto-generated catch block
 			exception.ajouterErreur(e.getMessage());
 		}
+		
 		//si les données sont validées
 		if (!exception.hasErreurs()) {
+			
 			utilisateurModifie = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-			utilisateurModifie.setCredit(100);
-			utilisateurModifie.setAdministrateur(false);
+			utilisateurModifie.setNoUtilisateur(no_utilisateur);
 			try {
-				utilisateurCnx = dao.update(utilisateurModifie);
+				dao.update(utilisateurModifie);
+				utilisateurCnx = utilisateurModifie;
 			} catch (Exception e) {
 				exception.ajouterErreur(e.getMessage());
-			} 
-			
+			}	
 		}
 				
 		//si des erreurs ont été détectées

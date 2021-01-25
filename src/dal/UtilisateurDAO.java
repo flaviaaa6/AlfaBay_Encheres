@@ -179,7 +179,7 @@ public class UtilisateurDAO {
 		return utilisateur; 
 	}
 
-	public Utilisateur update(Utilisateur utilisateur) throws SQLException {
+	public void update(Utilisateur utilisateur) throws SQLException {
 
 
 		try {
@@ -196,25 +196,16 @@ public class UtilisateurDAO {
 			stmtUpdate.setString(7, utilisateur.getCodePostal());
 			stmtUpdate.setString(8, utilisateur.getVille());
 			stmtUpdate.setString(9, utilisateur.getMotDePasse());
-			stmtUpdate.setInt(10, utilisateur.getCredit());
-			stmtUpdate.setBoolean(11, utilisateur.isAdministrateur());
+			stmtUpdate.setInt(10, utilisateur.getNoUtilisateur());
 			stmtUpdate.executeUpdate();
 
-			rs = pstmt.getGeneratedKeys();
-
-			if(rs.next()){
-				utilisateur.setNoUtilisateur(rs.getInt(1));
-
-			}
+			stmtUpdate.executeUpdate();
 
 		} catch (SQLException e) {
 			BuisnessException be = new BuisnessException();
 			be.ajouterErreur("Problème de modification du profil de l'utilisateur dans la base. Cause :" + e.getMessage());
 			throw e;
 		}
-		
-		return utilisateurCnx;
-
 	}
 
 	public void delete(int id) {
