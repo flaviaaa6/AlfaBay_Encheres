@@ -103,9 +103,19 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                 </div>
             
                 <ul class="col-9 list-unstyled p-2">
-                    <li>un message d'erreur éventuellement !</li>
-                    <li>un autre message....</li>
-                </ul>
+					<div>
+						<c:if test="${!empty message }">
+							<p class="col-9 list-unstyled p-2">${message};</p>
+						</c:if>
+						<c:if test="${!empty erreurs }">
+							<ul class="col-9 list-unstyled p-2">
+								<c:forEach items="${erreurs }" var="erreur">
+									<li>${erreur }</li>
+								</c:forEach>
+							</ul>
+						</c:if>
+					</div>
+				</ul>
             </div>
             <!--filtre-->
             <form class="form-filter border mb-3" action="#" method="">
