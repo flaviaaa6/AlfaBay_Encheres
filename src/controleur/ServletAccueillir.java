@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bo.ArticleVendu;
+import exceptions.BuisnessException;
 import manager.ArticleVenduManager;
 
 /**
@@ -34,14 +35,16 @@ public class ServletAccueillir extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArticleVenduManager mgr = new ArticleVenduManager();
-		List<ArticleVendu> listeArticlesVendus = null;
+		List<ArticleVendu> listeAV = null;
 		
-			try { listeArticlesVendus = mgr.select();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			try { 
+				
+				listeAV  = mgr.select();
+				
+			} catch (BuisnessException e) {
 				e.printStackTrace();
 			}
-			request.setAttribute("listeArticlesVendus", listeArticlesVendus);
+			request.setAttribute("listeArticlesVendus", listeAV );
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
 		rd.forward(request, response);

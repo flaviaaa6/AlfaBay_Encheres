@@ -7,14 +7,13 @@ import java.util.List;
 
 import bo.ArticleVendu;
 import bo.Categorie;
-import bo.Retrait;
 import bo.Utilisateur;
 import dal.ArticleVenduDAO;
 import exceptions.BuisnessException;
 
 public class ArticleVenduManager {
 	BuisnessException exception = new BuisnessException();
-	private ArticleVenduDAO dao;
+	private ArticleVenduDAO dao = new ArticleVenduDAO();
 	List<ArticleVendu> listearticle = new ArrayList<ArticleVendu>();
 	
 	
@@ -38,9 +37,9 @@ public class ArticleVenduManager {
 
 	
 
-	public List<ArticleVendu> select() throws Exception
+	public List<ArticleVendu> select() throws BuisnessException
 	{
-	listearticle = dao.select();
+		listearticle = dao.select();
 	
 		return listearticle;
 	}

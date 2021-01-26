@@ -33,7 +33,8 @@
                     <strong>AlfaBay_Encheres</strong>
                 </a>
                 <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
-                    <img class="small-icon" src="images/user.png">
+                    <img class="small-icon" src="images/user.png" height="50"
+							width="50">
                     <span class="align-middle text-muted">Bienvenue ${utilisateurCnx.pseudo}, ${utilisateurCnx.credit}</span>
                 </a>
             </nav>

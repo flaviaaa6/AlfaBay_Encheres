@@ -23,8 +23,10 @@ public class ArticleVenduDAO {
 			+ " date_fin_enchere, prix_initial, no_categorie, no_utilisateur)" +
 			" VALUES (?,?,?,?,?,?,?)";
 	
-	private  final  static  String  SELECT =  "select * from ARTICLES_VENDUS a"
-			+ 	"INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur where etat_vente = 'EC'"; 
+	private  final  static  String  SELECT =	"select * from ARTICLES_VENDUS a "
+			+	"INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie "
+			+	"INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur "
+			+	"where etat_vente = 'EC'"; 
 	
 	private static final String SELECTBYID =" SELECT * from ARTICLES_VENDUS WHERE no_utilisateur = ?" 
 			+ " INNER JOIN  ENCHERES e ON e.a.no_article=a.no_article" 
@@ -73,7 +75,7 @@ public class ArticleVenduDAO {
 	
 
 
-	public static  List <ArticleVendu> select () throws BuisnessException {
+	public  List <ArticleVendu> select () throws BuisnessException {
 
 		ArticleVendu articleVendu = new ArticleVendu ();
 		List <ArticleVendu> listeRetourArticle =  new ArrayList <> ();
@@ -95,7 +97,6 @@ public class ArticleVenduDAO {
 				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
 				articleVendu.setPrixVente (rs.getInt("prix_vente"));
 				articleVendu.setEtatVente (rs.getString("etat_vente"));
-				//articleVendu.setNoCategorie(rs.getInt("no_categorie"));
 
 				Utilisateur vendeur = new Utilisateur();
 				vendeur.setNoUtilisateur(rs.getInt("no_utilisateur"));
@@ -112,6 +113,12 @@ public class ArticleVenduDAO {
 				vendeur.setAdministrateur(rs.getBoolean("administrateur"));
 				articleVendu.setUtilisateur(vendeur);
 
+				Categorie categorie = new Categorie();
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+				articleVendu.setCategorie(categorie);
+				
+				
 				listeRetourArticle.add(articleVendu);
 
 			}
