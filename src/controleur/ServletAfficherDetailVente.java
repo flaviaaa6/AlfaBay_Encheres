@@ -36,7 +36,9 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		
 		//recuperation du parametre no_article sur la jsp accueil; name = "id"
 		ArticleVendu articleDetail = new ArticleVendu();
-		int idArticle = Integer.parseInt(request.getParameter("id"));
+		String parametre = request.getParameter("id");
+		
+		int idArticle = Integer.parseInt(parametre);
 		articleDetail.setNoArticle(idArticle);
 		
 		

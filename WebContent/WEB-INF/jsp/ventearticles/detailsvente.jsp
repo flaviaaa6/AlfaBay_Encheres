@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -127,7 +128,7 @@
 							<p>Fin de l'enchère :</p>
 						</div>
 						<div class="col-md-4 mb-3">
-							<p>...</p>
+							<p><fmt:formatDate value="${article.dateFinEncheres}" pattern="HH'h'mm''ss - dd/MM/yyyy" /></p>
 						</div>
 					</div>
 					<div class="row">
@@ -135,7 +136,9 @@
 							<p>Retrait :</p>
 						</div>
 						<div class="col-md-4 mb-3">
-							<p>...</p>
+							<p>${article.retrait.rue }</p>
+							<p>${article.retrait.codePostal }</p>
+							<p>${article.retrait.ville }</p>
 						</div>
 					</div>
 					<div class="row">
@@ -143,7 +146,7 @@
 							<p>Vendeur :</p>
 						</div>
 						<div class="col-md-4 mb-3">
-							<p>...</p>
+							<p>${article.utilisateur.pseudo }</p>
 						</div>
 					</div>
 					<form action="${pageContext.request.contextPath}/detail/vente" method="post">
@@ -153,12 +156,16 @@
 							</div>
 							<div class="col-md-3 mb-3">
 								<input type="number" class="form-control" id="proposition"
-									name="proposition" min="" placeholder="" required>
-
+									name="proposition" min="<p>${article.enchere.montant_enchere }</p>" placeholder="" required>
 							</div>
-							<div class="col-md-4 mb-3">
-								<button class="btn btn-primary btn-lg btn-block" type="submit">Enchérir</button>
-							</div>
+							
+							<!-- si la date de fin d'enchere est antérieur a la date du jour : -->
+							<c:if test="${article.dateFinEncheres < localDateTime.now } ">
+			 
+								<div class="col-md-4 mb-3">
+									<button class="btn btn-primary btn-lg btn-block" type="submit">Enchérir</button>
+								</div>
+							</c:if>
 						</div>
 					</form>
 

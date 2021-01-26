@@ -203,8 +203,11 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 							<div class="card">
 								<div class="card-header text-center">
 
-									<h4 class="my-0 font-weight-normal">Article
-										:"${articleVendu.nomArticle}"</h4>
+									<h4 class="my-0 font-weight-normal">
+										<a href="${pageContext.request.contextPath }/detail/vente"><input
+										type="button" class="btn btn-primary btn-lg btn-block" name = "id"
+										value="Article	: ${articleVendu.nomArticle}" /></a>
+									</h4>
 								</div>
 								<div class="d-flex">
 									<div class="col-3 p-2">
@@ -228,6 +231,12 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 					</div>
 				</c:forEach>
 			</c:if>
+			
+			<h4 class="my-0 font-weight-normal">
+										<a href="${pageContext.request.contextPath }/detail/vente"><input
+										type="button" class="btn btn-primary btn-lg btn-block" name = "id"
+										value="Article	: ${articleVendu.nomArticle}" /></a>
+									</h4>
 			<%-- <div class="col-12 col-sm-6 p-2" >
                     <div class="card">
                         <div class="card-header text-center">
