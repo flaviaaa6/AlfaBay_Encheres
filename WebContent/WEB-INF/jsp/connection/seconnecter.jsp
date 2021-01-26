@@ -78,7 +78,19 @@
 				</div>
 
 				<ul class="col-9 list-unstyled p-2">
-					<li>un message d'erreur éventuellement !</li>
+					<div>
+		             <c:if test="${!empty message }">
+					 	<p class="col-9 list-unstyled p-2">${message};
+					 	</p>
+					</c:if>
+		            <c:if test="${!empty erreurs }">
+					 	<ul class="col-9 list-unstyled p-2">
+					 		<c:forEach items="${erreurs }" var="erreur">
+					 			<li>${erreur }</li>
+					 		</c:forEach>
+					 	</ul>
+					</c:if>
+               </div> 
 				</ul>
 			</div>
 			<!--formulaire-->

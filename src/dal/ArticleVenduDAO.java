@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.ArticleVendu;
+import bo.Categorie;
+import bo.Encheres;
+import bo.Retrait;
 import bo.Utilisateur;
 import exceptions.BuisnessException;
 
@@ -22,6 +25,13 @@ public class ArticleVenduDAO {
 	
 	private  final  static  String  SELECT =  "select * from ARTICLES_VENDUS a"
 			+ 	"INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur where etat_vente = 'EC'"; 
+	
+	private static final String SELECTBYID =" SELECT * from ARTICLES_VENDUS WHERE no_utilisateur = ?" 
+			+ " INNER JOIN  ENCHERES e ON e.a.no_article=a.no_article" 
+			+ "	INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur"
+			+ "INNER JOIN RETRAITS r ON r.no_article=a.no_article"
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie";
+
 
 	public ArticleVendu insert(ArticleVendu article) throws SQLException {
 		
@@ -85,21 +95,21 @@ public class ArticleVenduDAO {
 				articleVendu.setMiseAPrix(rs.getInt("prix_initial"));
 				articleVendu.setPrixVente (rs.getInt("prix_vente"));
 				articleVendu.setEtatVente (rs.getString("etat_vente"));
-				articleVendu.setNoCategorie(rs.getInt("no_categorie"));
+				//articleVendu.setNoCategorie(rs.getInt("no_categorie"));
 
 				Utilisateur vendeur = new Utilisateur();
-				//vendeur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				vendeur.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				vendeur.setPseudo(rs.getString("pseudo"));
-				//vendeur.setNom(rs.getString("nom"));
-				//vendeur.setPrenom(rs.getString("prenom"));
-				//vendeur.setEmail(rs.getString("email"));
-				//vendeur.setTelephone(rs.getString("telephone"));
-				//vendeur.setRue(rs.getString("rue"));
-				//vendeur.setCodePostal(rs.getString("code_postal"));
-				//vendeur.setVille(rs.getString("ville"));
-				//vendeur.setMotDePasse(rs.getString("mot_de_passe"));
-				//vendeur.setCredit(rs.getInt("credit"));
-				//vendeur.setAdministrateur(rs.getBoolean("administrateur"));
+				vendeur.setNom(rs.getString("nom"));
+				vendeur.setPrenom(rs.getString("prenom"));
+				vendeur.setEmail(rs.getString("email"));
+				vendeur.setTelephone(rs.getString("telephone"));
+				vendeur.setRue(rs.getString("rue"));
+				vendeur.setCodePostal(rs.getString("code_postal"));
+				vendeur.setVille(rs.getString("ville"));
+				vendeur.setMotDePasse(rs.getString("mot_de_passe"));
+				vendeur.setCredit(rs.getInt("credit"));
+				vendeur.setAdministrateur(rs.getBoolean("administrateur"));
 				articleVendu.setUtilisateur(vendeur);
 
 				listeRetourArticle.add(articleVendu);
@@ -116,6 +126,62 @@ public class ArticleVenduDAO {
 		}
 
 		return listeRetourArticle;		
-	}		
+	}	
+	
+public ArticleVendu selectById(int id) throws Exception {
+		
+		ArticleVendu detailArticle = new ArticleVendu();
+		
+
+
+
+
+			try {
+				Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement rqt = cnx.prepareStatement(SELECTBYID);
+
+				rqt.setInt(1, id);
+				
+				ResultSet rs = rqt.executeQuery();
+				if(rs.next())
+				{
+
+					
+					detailArticle.setNomArticle(rs.getString("nom_article"));
+					detailArticle.setMiseAPrix(rs.getInt("prix_initial"));
+					detailArticle.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()), rs.getTime("date_debut_enchere").toLocalTime()));
+					detailArticle.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()), rs.getTime("date_fin_enchere").toLocalTime()));
+					detailArticle.setNoArticle(rs.getInt("no_article"));
+					detailArticle.setMiseAPrix(rs.getInt("prix_initial"));
+					
+					Categorie categ = new Categorie();
+					categ.setLibelle(rs.getString("libelle"));
+					detailArticle.setCategorie(categ);
+					
+					Encheres enchere = new Encheres();
+					enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime()));
+					enchere.setMontantEnchère(rs.getInt("montant_enchere"));
+					detailArticle.setEnchere(enchere);
+					
+					Retrait retrait = new Retrait();
+				
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					detailArticle.setRetrait(retrait);
+
+					Utilisateur utilisateur = new Utilisateur();
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setCredit(rs.getInt("credit"));
+					detailArticle.setUtilisateur(utilisateur);
+					
+				}
+			} catch (SQLException e) {
+				//propager une exception personnalisée
+				throw new Exception("Problème d'extraction des l'article de la base. Cause : " + e.getMessage());
+			}
+
+			return detailArticle;
+	}
 	
 }

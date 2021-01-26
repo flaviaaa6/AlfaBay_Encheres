@@ -44,5 +44,17 @@ public class ArticleVenduManager {
 	
 		return listearticle;
 	}
+	
+	
+	
+	public ArticleVendu selectById(int id) throws Exception {
+		
+		ArticleVendu detailArticle = new ArticleVendu();
+		detailArticle = dao.selectById(id);
+		
+		
+		return detailArticle;
+		
+	}
 
 }

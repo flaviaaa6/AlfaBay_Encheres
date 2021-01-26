@@ -15,16 +15,12 @@ public class ArticleVendu {
 	private String etatVente;
 	private Utilisateur utilisateur;                
 	private Categorie categorie;
+	private Encheres enchere;
+	private Retrait retrait;
 	
 	
 	
 	
-	/**
-	 * Constructeur par défaut
-	 */
-	public ArticleVendu() {
-		super();
-	}
 	
 
 
@@ -306,6 +302,52 @@ public class ArticleVendu {
 		this.categorie = noCategorie;
 	}                  
 						  
+	/**
+	 * @return the enchere
+	 */
+	public Encheres getEnchere() {
+		return enchere;
+	}
+
+
+
+
+	/**
+	 * @param enchere the enchere to set
+	 */
+	public void setEnchere(Encheres enchere) {
+		this.enchere = enchere;
+	}
+
+
+
+
+	/**
+	 * @return the retrait
+	 */
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+
+
+
+	/**
+	 * @param retrait the retrait to set
+	 */
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
+	}
+
+
+
+
+	/**
+	 * Constructeur par défaut
+	 */
+	public ArticleVendu() {
+		super();
+	}
 	
 	
 	
