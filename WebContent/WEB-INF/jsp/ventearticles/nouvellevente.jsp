@@ -36,12 +36,12 @@
 				class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
 				<!-- Brand/logo -->
 				<a class="navbar-brand" href="/accueil"> <img
-					class="small-icon" src="/images/trocenchere.png"
-					alt="Accueil ENI-Encheres"> <strong>Alfa-Bay
+					class="small-icon" src="../images/trocenchere.png"
+					alt="Accueil ENI-Encheres" height="50" width="50"> <strong>Alfa-Bay
 						Encheres</strong>
 				</a> <a class="navbar-brand" href="/affichage" alt="Gérer mon profil"
 					title="Gérer mon profil"> <img class="small-icon"
-					src="images/user.png"> <span class="align-middle text-muted">${utilisateurCnx.pseudo },
+					src="../images/user.png" height="50" width="50"> <span class="align-middle text-muted">${utilisateurCnx.pseudo },
 						crédit : ${utilisateurCnx.credit } </span>
 				</a>
 			</nav>
@@ -52,14 +52,14 @@
 			<!--title-->
 			<div class="mx-auto text-center">
 				<h1>Nouvelle Vente</h1>
-				<img class="mb-4 large-icon rounded-circle" src="images/user.png"
+				<img class="mb-4 small-icon rounded-circle" height="50" width="50" src="../images/user.png"
 					alt="">
 			</div>
 			<!--erreur-->
 			<c:if test="${!empty message }">
 				<div class="d-flex alert-danger">
 					<div class="col-3 p-2">
-						<img class="small-icon" src="images/error.png">
+						<img class="small-icon" height="50" width="50" src="../images/error.png">
 						<p class ="text-center">${message}</p>
 					</div>
 					<c:if test="${!empty erreurs }">

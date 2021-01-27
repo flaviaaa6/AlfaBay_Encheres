@@ -81,6 +81,8 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		//création de l'enchere a inséré : 
 		Enchere enchere = new Enchere();
 		enchere.setMontantEnchère(proposition);
+		
+		
 		enchere.setNoUtilisateur(utilisateurCnx.getNoUtilisateur());
 		enchere.setDateEnchere(LocalDateTime.now());
 		enchere.setNoArticle(articleDetail.getNoArticle());

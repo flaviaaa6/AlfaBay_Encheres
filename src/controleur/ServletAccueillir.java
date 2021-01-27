@@ -40,7 +40,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 			try {
 				listeAV = mgr.select();
-			} catch (BuisnessException e) {
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
