@@ -220,14 +220,22 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 					<div class="row justify-content-center border-top card-deck">
 						<div class="col-12 col-sm-6 p-2">
 							<div class="card">
-								<div class="card-header text-center">
+						<div class="card-header text-center">
 
-									<h4 class="my-0 font-weight-normal">
-										<a href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
-										class="btn btn-primary btn-lg btn-block"> Article : ${articleVendu.nomArticle}</a>
-									</h4>
-								</div>
-								<div class="d-flex">
+							<h4 class="my-0 font-weight-normal">
+								<c:if test="${!empty sessionScope.utilisateurCnx.pseudo}">
+									<a
+										href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
+										class="btn btn-primary btn-lg btn-block"> Article :
+										${articleVendu.nomArticle}</a>
+								</c:if>
+								<c:if test="${empty sessionScope.utilisateurCnx.pseudo}">
+									<p class="btn btn-primary btn-lg btn-block">Article :
+										${articleVendu.nomArticle}</p>
+								</c:if>
+							</h4>
+						</div>
+						<div class="d-flex">
 									<div class="col-3 p-2">
 										<img class="img-fluid img-thumbnail" src="images/photo.png"
 											alt="pas de photo" />
