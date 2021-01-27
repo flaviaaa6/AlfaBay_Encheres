@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,23 +33,27 @@ public class ServletAccueillir extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArticleVenduManager mgr = new ArticleVenduManager();
 		List<ArticleVendu> listeAV = null;
 		
-			try { 
-				
-				listeAV  = mgr.select();
-				
+			try {
+				listeAV = mgr.select();
 			} catch (BuisnessException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("listeArticlesVendus", listeAV );
+		
+			request.setAttribute("listeArticlesVendus", listeAV);
+	
+			
+			
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
 		rd.forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

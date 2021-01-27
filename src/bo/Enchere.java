@@ -1,25 +1,23 @@
 package bo;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-public class Encheres {
+public class Enchere {
 	private LocalDateTime dateEnchere;
 	private int montantEnchère;
-	private int noUtilisateur;
-	private int noArticle;
+	private Utilisateur utilisateur;
+	private ArticleVendu articleVendu;
 	/**
 	 * 
 	 */
-	public Encheres() {
+	public Enchere() {
 		super();
 	}
 	/**
 	 * @param dateEnchere
 	 * @param montantEnchère
 	 */
-	public Encheres(LocalDateTime dateEnchere, int montantEnchère) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchère) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchère = montantEnchère;
@@ -31,13 +29,14 @@ public class Encheres {
 	 * @param noUtilisateur
 	 * @param noArticle
 	 */
-	public Encheres(LocalDateTime dateEnchere, int montantEnchère, int noUtilisateur, int noArticle) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchère, Utilisateur utilisateur, ArticleVendu noArticle) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchère = montantEnchère;
-		this.noUtilisateur = noUtilisateur;
-		this.noArticle = noArticle;
+		this.utilisateur = utilisateur;
+		this.articleVendu = noArticle;
 	}
+	
 	/**
 	 * @return the dateEnchere
 	 */
@@ -65,26 +64,26 @@ public class Encheres {
 	/**
 	 * @return the noUtilisateur
 	 */
-	public int getNoUtilisateur() {
-		return noUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 	/**
 	 * @param noUtilisateur the noUtilisateur to set
 	 */
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 	/**
 	 * @return the noArticle
 	 */
-	public int getNoArticle() {
-		return noArticle;
+	public ArticleVendu getArticle() {
+		return articleVendu;
 	}
 	/**
 	 * @param noArticle the noArticle to set
 	 */
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
+	public void setArticleVendu(ArticleVendu articleVendu) {
+		this.articleVendu = articleVendu;
 	}
 	
 	

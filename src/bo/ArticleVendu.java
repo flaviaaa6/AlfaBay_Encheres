@@ -15,7 +15,7 @@ public class ArticleVendu {
 	private String etatVente;
 	private Utilisateur utilisateur;                
 	private Categorie categorie;
-	private Encheres enchere;
+	private Enchere enchere;
 	private Retrait retrait;
 	
 	
@@ -305,7 +305,7 @@ public class ArticleVendu {
 	/**
 	 * @return the enchere
 	 */
-	public Encheres getEnchere() {
+	public Enchere getEnchere() {
 		return enchere;
 	}
 
@@ -315,7 +315,7 @@ public class ArticleVendu {
 	/**
 	 * @param enchere the enchere to set
 	 */
-	public void setEnchere(Encheres enchere) {
+	public void setEnchere(Enchere enchere) {
 		this.enchere = enchere;
 	}
 

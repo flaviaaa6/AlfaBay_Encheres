@@ -30,69 +30,88 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <div class="container-fluid">
 
 
-<header>
-<!-- VERSION GRAND ECRAN-->
-    <nav class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
-		   <!-- LOGO -->
-		   <a class="navbar-brand" href="${pageContext.request.contextPath}/accueil">
-		       <img class="small-icon" src="images/trocenchere.png" alt="Accueil AlphaBay_Encheres">
-		       <strong>AlphaBay_Encheres</strong>
-		   </a>
-		
-		
-<!-- ENTETE POUR PETIT ECRAN -->		
-	<ul class="navbar-nav ml-auto">
-	    <li class="nav-item dropdown d-lg-none">
-	    
-	    	<!-- LOGO -->	
-	        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-	            <img class="small-icon" src="images/menu.png" alt="Menu AlphaBay_Encheres">
-	        </a>
-	        
-	        <div class="dropdown-menu">
-	        
-	            <c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
-			       	<img class="small-icon" src="images/user.png">
-			       	<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, 0 crédit(s)</span>
+		<header>
+			<!-- VERSION GRAND ECRAN-->
+			<nav
+				class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
+				<!-- LOGO -->
+				<a class="navbar-brand"
+					href="${pageContext.request.contextPath}/accueil"> <img
+					class="small-icon" src="images/trocenchere.png"
+					alt="Accueil AlphaBay_Encheres"> <strong>AlphaBay_Encheres</strong>
+				</a>
+
+
+				<!-- ENTETE POUR PETIT ECRAN -->
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown d-lg-none">
+						<!-- LOGO --> <a class="nav-link dropdown-toggle"
+						href="${pageContext.request.contextPath}/accueil" id="navbardrop"
+						data-toggle="dropdown"> <img class="small-icon"
+							src="images/menu.png" alt="Menu AlphaBay_Encheres">
+					</a>
+
+						<div class="dropdown-menu">
+
+							<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
+								<img class="small-icon" src="images/user.png">
+								<span class="align-middle text-muted">BIENVENU(E)
+									${utilisateurCnx.pseudo}, 0 crédit(s)</span>
 			       	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			       	<a class="dropdown-item" href="#">Administrer</a> 
-	            	<a class="dropdown-item" href="${pageContext.request.contextPath}/vente/add">Vendre un article</a>
-			       	<a class="dropdown-item" href="${pageContext.request.contextPath}/affichage" title="Gérer mon profil">Gérer mon profil</a>
-			       	<a class="dropdown-item" href="${pageContext.request.contextPath}/deconnect">Se déconnecter</a>
-				</c:if>
-				
-	            <c:if test="${empty sessionScope.utilisateurCnx.pseudo }">
-		            <a class="dropdown-item" href="${pageContext.request.contextPath}/inscription">M'inscrire</a>
-		            <a class="dropdown-item" href="${pageContext.request.contextPath}/connect">Me connecter</a>
-		            
-	            </c:if>
-	            
-	        </div>
-	    </li>  
-	    
-<!-- ENTETE POUR ECRAN MOYEN-->	
+			       	<a class="dropdown-item" href="#">Administrer</a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/vente/add">Vendre
+									un article</a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/affichage"
+									title="Gérer mon profil">Gérer mon profil</a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/deconnect">Se
+									déconnecter</a>
+							</c:if>
 
-		<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
-       		<img class="small-icon" src="images/user.png">
-       		<span class="align-middle text-muted">BIENVENU(E) ${utilisateurCnx.pseudo}, 0 crédit(s)</span>
+							<c:if test="${empty sessionScope.utilisateurCnx.pseudo }">
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/inscription">M'inscrire</a>
+								<a class="dropdown-item"
+									href="${pageContext.request.contextPath}/connect">Me
+									connecter</a>
+
+							</c:if>
+
+						</div>
+					</li>
+
+					<!-- ENTETE POUR ECRAN MOYEN-->
+
+					<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
+						<img class="small-icon" src="images/user.png">
+						<span class="align-middle text-muted">BIENVENU(E)
+							${utilisateurCnx.pseudo}, 0 crédit(s)</span>
        		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-       		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="#">Administrer</a></li> 
-       		<li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/vente/add">Vendre un article</a></li>
-	  		<a class="nav-link" href="${pageContext.request.contextPath}/affichage">Gérer mon profil</a>
-	  		<a class="nav-link" href="${pageContext.request.contextPath}/deconnect">Se déconnecter</a>
-	     </c:if> 
-	     
-      	<c:if test="${empty sessionScope.utilisateurCnx.pseudo }">
-	       <li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/inscription">M'inscrire</a></li>
-	       <li class="nav-item d-none d-lg-block"><a class="nav-link" href="${pageContext.request.contextPath}/connect">Me connecter</a></li>
-       </c:if>
-	       	
+       		<li class="nav-item d-none d-lg-block"><a class="nav-link"
+							href="#">Administrer</a></li>
+						<li class="nav-item d-none d-lg-block"><a class="nav-link"
+							href="${pageContext.request.contextPath}/vente/add">Vendre un article</a></li>
+						<a class="nav-link"
+							href="${pageContext.request.contextPath}/affichage">Gérer mon profil</a>
+						<a class="nav-link"
+							href="${pageContext.request.contextPath}/deconnect">Se déconnecter</a>
+					</c:if>
 
-	</ul>
-    </nav>
-</header>   
-        
-        <%-- -----------------CORPS DE LA PAGE D'ACCUEIL----------------- --%>
+					<c:if test="${empty sessionScope.utilisateurCnx.pseudo }">
+						<li class="nav-item d-none d-lg-block"><a class="nav-link"
+							href="${pageContext.request.contextPath}/inscription">M'inscrire</a></li>
+						<li class="nav-item d-none d-lg-block"><a class="nav-link"
+							href="${pageContext.request.contextPath}/connect">Me connecter</a></li>
+					</c:if>
+
+
+				</ul>
+			</nav>
+		</header>
+</div>
+		<%-- -----------------CORPS DE LA PAGE D'ACCUEIL----------------- --%>
         <main>
             <!--title-->
             <div class="mx-auto text-center"><h1>Enchères</h1></div>
@@ -196,7 +215,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             </form>
 
 			<!--enchères-->
-			<c:if test="${!empty listeArticlesVendus }">
+			<c:if test="${empty sessionScope.utilisateurCnx.pseudo || !empty sessionScope.utilisateurCnx.pseudo }"> 
+			
 				<c:forEach items="${listeArticlesVendus}" var="articleVendu">
 					<div class="row justify-content-center border-top card-deck">
 						<div class="col-12 col-sm-6 p-2">
@@ -217,7 +237,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 										<li>Prix :"${articleVendu.miseAPrix}"</li>
 										<li>Meilleure enchère : 0 point(s)</li>
 										<li>Fin de l'enchère :"${articleVendu.dateFinEnchere}"</li>
-										<%--<li>$articleVendu.pseudo</li> --%>
+										<li>$articleVendu.utilisateur.pseudo</li>
 									</ul>
 								</div>
 								<a class="mt-3 btn btn-lg btn-block btn-primary" href="#"
@@ -231,48 +251,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				</c:forEach>
 			</c:if>
 			
-			
-			<%-- <div class="col-12 col-sm-6 p-2" >
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <h4 class="my-0 font-weight-normal">Article 2</h4>
-                        </div>
-                        <div class="d-flex">
-                            <div class="col-3 p-2">
-                                <img class="img-fluid img-thumbnail" src="images/photo.png" alt="pas de photo" />
-                            </div>
-                            <ul class="col-9 list-unstyled p-2">
-                                <li>Prix : 0 point(s)</li>
-                                <li>Meilleure enchère : 0 point(s)</li>
-                                <li>Fin de l'enchère : dd-MM-yyyy HH:mm</li>
-                                <li>Vendeur : xxxxxxxxx</li>
-                            </ul>
-                        </div>
-                        <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
-                            <img class="small-icon" src="images/bid.png">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 p-2" >
-                    <div class="card">
-                    <div class="card-header text-center">
-                        <h4 class="my-0 font-weight-normal">Article 3</h4>
-                    </div>
-                    <div class="d-flex">
-                        <div class="col-3 p-2">
-                            <img class="img-fluid img-thumbnail" src="images/photo.png" alt="pas de photo" />
-                        </div>
-                        <ul class="col-9 list-unstyled p-2">
-                            <li>Prix : 0 point(s)</li>
-                            <li>Meilleure enchère : 0 point(s)</li>
-                            <li>Fin de l'enchère : dd-MM-yyyy HH:mm</li>
-                            <li>Vendeur : xxxxxxxxx</li>
-                        </ul>
-                    </div>
-                    <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
-                        <img class="small-icon" src="images/bid.png">
-                    </a>
-                </div>--%>
 	        </div>
         </main>
 

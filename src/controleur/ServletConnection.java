@@ -67,7 +67,7 @@ public class ServletConnection extends HttpServlet {
 			request.setAttribute("message", message);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/accueil");
 		rd.forward(request, response);
 	}
 }

@@ -37,12 +37,12 @@ public class ArticleVenduManager {
 
 	
 
-	public List<ArticleVendu> select() throws BuisnessException
-	{
-		listearticle = dao.select();
+	public List<ArticleVendu> select() throws SQLException{
+		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
+		listeArticlesVendus = dao.select();
+			return listeArticlesVendus;
+		}
 	
-		return listearticle;
-	}
 	
 	
 	
@@ -50,7 +50,6 @@ public class ArticleVenduManager {
 		
 		ArticleVendu detailArticle = new ArticleVendu();
 		detailArticle = dao.selectByName(nomArticle);
-		
 		
 		return detailArticle;
 		

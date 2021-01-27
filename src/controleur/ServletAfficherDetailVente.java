@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bo.ArticleVendu;
-import bo.Encheres;
+import bo.Enchere;
 import bo.Utilisateur;
 import manager.ArticleVenduManager;
 import manager.EnchereManager;
@@ -79,7 +79,7 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		Utilisateur utilisateurCnx = (Utilisateur) session.getAttribute("utilisateurCnx");
 				
 		//création de l'enchere a inséré : 
-		Encheres enchere = new Encheres();
+		Enchere enchere = new Enchere();
 		enchere.setMontantEnchère(proposition);
 		enchere.setNoUtilisateur(utilisateurCnx.getNoUtilisateur());
 		enchere.setDateEnchere(LocalDateTime.now());

@@ -12,7 +12,7 @@ import java.util.List;
 
 import bo.ArticleVendu;
 import bo.Categorie;
-import bo.Encheres;
+import bo.Enchere;
 import bo.Retrait;
 import bo.Utilisateur;
 import exceptions.BuisnessException;
@@ -25,7 +25,7 @@ public class ArticleVenduDAO {
 	
 	private  final  static  String  SELECT =	"select * from ARTICLES_VENDUS a "
 			+	"INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie "
-			+	"INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur "
+			+	"INNER JOIN UTILISATEURS u ON  u.no_utilisateur=a.no_utilisateur "
 			+	"where etat_vente = 'EC'"; 
 	
 	private static final String SELECTBYNAME =" SELECT * from ARTICLES_VENDUS a " 
@@ -77,7 +77,7 @@ public class ArticleVenduDAO {
 	
 
 
-	public  List <ArticleVendu> select () throws BuisnessException {
+	public  List <ArticleVendu> select () throws SQLException {
 
 		ArticleVendu articleVendu = new ArticleVendu ();
 		List <ArticleVendu> listeRetourArticle =  new ArrayList <> ();
@@ -165,7 +165,7 @@ public ArticleVendu selectByName(String nomArticle) throws Exception {
 					categ.setLibelle(rs.getString("libelle"));
 					detailArticle.setCategorie(categ);
 					
-					Encheres enchere = new Encheres();
+					Enchere enchere = new Enchere();
 					enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime()));
 					enchere.setMontantEnchère(rs.getInt("montant_enchere"));
 					detailArticle.setEnchere(enchere);
