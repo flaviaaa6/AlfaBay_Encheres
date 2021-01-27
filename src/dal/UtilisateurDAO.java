@@ -32,7 +32,7 @@ public class UtilisateurDAO {
 
 	private static final String DELETE = "DELETE FROM UTILISATEURS where no_utilisateur = ?";
 
-	private static final String SELECTBYPSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville FROM UTILISATEURS WHERE pseudo = ?"; 
+	private static final String SELECTBYPSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?"; 
 
 
 	/* Implémentation des méthodes définies dans l'UtilisateurManager */
@@ -206,6 +206,42 @@ public class UtilisateurDAO {
 			be.ajouterErreur("Problème de modification du profil de l'utilisateur dans la base. Cause :" + e.getMessage());
 			throw e;
 		}
+	}
+	
+	public Utilisateur autreUtilisateur(String pseudo) { 
+
+		
+		
+		Utilisateur autreUtilisateur = null;
+		Connection cnx = null;
+		PreparedStatement pstmt;
+		try {
+			// Récupération d'une connexion 
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECTBYPSEUDO);
+			pstmt.setString(1, pseudo);
+			ResultSet rs = pstmt.executeQuery(); 
+			// Parcours de la ligne de données de l'éventuel ResulSet retourné 
+			if ( rs.next() ) { 
+				autreUtilisateur = new Utilisateur(); 
+
+				
+				autreUtilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				autreUtilisateur.setPseudo(rs.getString("pseudo"));
+				autreUtilisateur.setNom(rs.getString("nom"));
+				autreUtilisateur.setPrenom(rs.getString("prenom"));
+				autreUtilisateur.setEmail(rs.getString("email"));
+				autreUtilisateur.setTelephone(rs.getString("telephone"));
+				autreUtilisateur.setRue(rs.getString("rue"));
+				autreUtilisateur.setCodePostal(rs.getString("code_postal"));
+
+				
+			} 
+		} catch ( SQLException e ) { 
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return autreUtilisateur;
 	}
 
 	public void delete(int id) {
