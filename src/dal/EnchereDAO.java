@@ -21,7 +21,7 @@ public class EnchereDAO {
 			+ "VALUES (?,?,?,?)";
 	
 	private  final  static  String ENCHERESOUVERTES =	"select * from  ENCHERES e"
-													+	"INNER JOIN ARTICLES_VENDUS a ON a.no_article=a.no_article"
+													+	"INNER JOIN ARTICLES_VENDUS a ON a.no_article=e.no_article"
 													+	"INNER JOIN UTILISATEURS u ON  u.no_utilisateur=e.no_utilisateur ";
 											
 	public void insert(Enchere enchere) throws SQLException {
