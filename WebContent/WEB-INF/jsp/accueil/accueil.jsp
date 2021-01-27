@@ -56,7 +56,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 							<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
 								<img class="small-icon" src="images/user.png">
 								<span class="align-middle text-muted">BIENVENU(E)
-									${utilisateurCnx.pseudo} ${utilisateurCnx.credit} credit(s)</span>
+									${utilisateurCnx.pseudo}, ${utilisateurCnx.credit} credit(s)</span>
 			       	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			       	<a class="dropdown-item" href="#">Enchères</a>
 								<a class="dropdown-item"
@@ -87,7 +87,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 					<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
 						<img class="small-icon" src="images/user.png">
 						<span class="align-middle text-muted">BIENVENU(E)
-							${utilisateurCnx.pseudo} ${utilisateurCnx.credit} credit(s)</span>
+							${utilisateurCnx.pseudo}, ${utilisateurCnx.credit} credit(s)</span>
        		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
        		<li class="nav-item d-none d-lg-block"><a class="nav-link"
 							href="#">Enchères</a></li>
