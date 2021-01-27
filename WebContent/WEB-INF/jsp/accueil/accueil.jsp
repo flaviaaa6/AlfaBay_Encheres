@@ -215,8 +215,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             </form>
 
 			<!--enchères-->
-			<c:if test="${empty sessionScope.utilisateurCnx.pseudo || !empty sessionScope.utilisateurCnx.pseudo }"> 
-			
+
 				<c:forEach items="${listeArticlesVendus}" var="articleVendu">
 					<div class="row justify-content-center border-top card-deck">
 						<div class="col-12 col-sm-6 p-2">
@@ -234,10 +233,10 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 											alt="pas de photo" />
 									</div>
 									<ul class="col-9 list-unstyled p-2">
-										<li>Prix :"${articleVendu.miseAPrix}"</li>
+										<li>Prix :${articleVendu.miseAPrix}</li>
 										<li>Meilleure enchère : 0 point(s)</li>
-										<li>Fin de l'enchère :"${articleVendu.dateFinEnchere}"</li>
-										<li>$articleVendu.utilisateur.pseudo</li>
+										<li>Fin de l'enchère :${articleVendu.dateFinEnchere}</li>
+										<li>Vendeur : ${articleVendu.utilisateur.pseudo}</li>
 									</ul>
 								</div>
 								<a class="mt-3 btn btn-lg btn-block btn-primary" href="#"
@@ -249,7 +248,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 						</div>
 					</div>
 				</c:forEach>
-			</c:if>
 			
 	        </div>
         </main>
