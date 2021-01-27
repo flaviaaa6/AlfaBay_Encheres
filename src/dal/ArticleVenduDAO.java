@@ -28,11 +28,13 @@ public class ArticleVenduDAO {
 			+	"INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur "
 			+	"where etat_vente = 'EC'"; 
 	
-	private static final String SELECTBYID =" SELECT * from ARTICLES_VENDUS WHERE no_utilisateur = ?" 
-			+ " INNER JOIN  ENCHERES e ON e.a.no_article=a.no_article" 
-			+ "	INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur"
-			+ "INNER JOIN RETRAITS r ON r.no_article=a.no_article"
-			+ "INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie";
+	private static final String SELECTBYNAME =" SELECT * from ARTICLES_VENDUS a " 
+			+ " LEFT OUTER JOIN ENCHERES e ON e.no_article=a.no_article " 
+			+ "	INNER JOIN UTILISATEURS u ON u.no_utilisateur=a.no_utilisateur "
+			+ " LEFT OUTER JOIN RETRAITS r ON r.no_article=a.no_article "
+			+ " INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie "
+			+ " WHERE nom_article = ? "
+			+ " ORDER BY date_enchere DESC";
 
 
 	public ArticleVendu insert(ArticleVendu article) throws SQLException {
@@ -135,7 +137,7 @@ public class ArticleVenduDAO {
 		return listeRetourArticle;		
 	}	
 	
-public ArticleVendu selectById(int id) throws Exception {
+public ArticleVendu selectByName(String nomArticle) throws Exception {
 		
 		ArticleVendu detailArticle = new ArticleVendu();
 		
@@ -145,15 +147,13 @@ public ArticleVendu selectById(int id) throws Exception {
 
 			try {
 				Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement rqt = cnx.prepareStatement(SELECTBYID);
+				PreparedStatement rqt = cnx.prepareStatement(SELECTBYNAME);
 
-				rqt.setInt(1, id);
+				rqt.setString(1, nomArticle);
 				
 				ResultSet rs = rqt.executeQuery();
 				if(rs.next())
-				{
-
-					
+				{					
 					detailArticle.setNomArticle(rs.getString("nom_article"));
 					detailArticle.setMiseAPrix(rs.getInt("prix_initial"));
 					detailArticle.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()), rs.getTime("date_debut_enchere").toLocalTime()));

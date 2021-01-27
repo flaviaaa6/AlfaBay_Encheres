@@ -7,8 +7,8 @@ import java.util.Date;
 public class Encheres {
 	private LocalDateTime dateEnchere;
 	private int montantEnchère;
-	private Utilisateur noUtilisateur;
-	private ArticleVendu noArticle;
+	private int noUtilisateur;
+	private int noArticle;
 	/**
 	 * 
 	 */
@@ -31,7 +31,7 @@ public class Encheres {
 	 * @param noUtilisateur
 	 * @param noArticle
 	 */
-	public Encheres(LocalDateTime dateEnchere, int montantEnchère, Utilisateur noUtilisateur, ArticleVendu noArticle) {
+	public Encheres(LocalDateTime dateEnchere, int montantEnchère, int noUtilisateur, int noArticle) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchère = montantEnchère;
@@ -65,25 +65,25 @@ public class Encheres {
 	/**
 	 * @return the noUtilisateur
 	 */
-	public Utilisateur getNoUtilisateur() {
+	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
 	/**
 	 * @param noUtilisateur the noUtilisateur to set
 	 */
-	public void setNoUtilisateur(Utilisateur noUtilisateur) {
+	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 	/**
 	 * @return the noArticle
 	 */
-	public ArticleVendu getNoArticle() {
+	public int getNoArticle() {
 		return noArticle;
 	}
 	/**
 	 * @param noArticle the noArticle to set
 	 */
-	public void setNoArticle(ArticleVendu noArticle) {
+	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
 	

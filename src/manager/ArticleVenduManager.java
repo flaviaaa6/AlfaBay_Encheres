@@ -46,10 +46,10 @@ public class ArticleVenduManager {
 	
 	
 	
-	public ArticleVendu selectById(int id) throws Exception {
+	public ArticleVendu selectByName(String nomArticle) throws Exception {
 		
 		ArticleVendu detailArticle = new ArticleVendu();
-		detailArticle = dao.selectById(id);
+		detailArticle = dao.selectByName(nomArticle);
 		
 		
 		return detailArticle;

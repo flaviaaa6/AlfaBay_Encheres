@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page import="java.util.List"%>
-<%@page import="java.time.LocalDateTime"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html>
@@ -207,9 +204,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 								<div class="card-header text-center">
 
 									<h4 class="my-0 font-weight-normal">
-										<a href="${pageContext.request.contextPath }/detail/vente"><input
-										type="button" class="btn btn-primary btn-lg btn-block" name = "id"
-										value="Article	: ${articleVendu.nomArticle}" /></a>
+										<a href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
+										class="btn btn-primary btn-lg btn-block"> Article : ${articleVendu.nomArticle}</a>
 									</h4>
 								</div>
 								<div class="d-flex">
@@ -221,7 +217,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 										<li>Prix :"${articleVendu.miseAPrix}"</li>
 										<li>Meilleure enchère : 0 point(s)</li>
 										<li>Fin de l'enchère :"${articleVendu.dateFinEnchere}"</li>
-										<li>Vendeur : ${articleVendu.utilisateur.pseudo}</li> 
+										<%--<li>$articleVendu.pseudo</li> --%>
 									</ul>
 								</div>
 								<a class="mt-3 btn btn-lg btn-block btn-primary" href="#"
@@ -235,7 +231,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				</c:forEach>
 			</c:if>
 			
-	
+			
 			<%-- <div class="col-12 col-sm-6 p-2" >
                     <div class="card">
                         <div class="card-header text-center">
@@ -285,8 +281,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             <div class="mt-3">
                 <img class="small-icon" src="images/ateni.png" alt="Eni Ecole">
                 <small class="d-block text-muted">&copy; ENI Ecole 2020</small>
-        </footer>
-    </div>
+       		 </div>
+   		 </footer>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

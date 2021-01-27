@@ -128,7 +128,7 @@
 							<p>Fin de l'enchère :</p>
 						</div>
 						<div class="col-md-4 mb-3">
-							<p><fmt:formatDate value="${article.dateFinEncheres}" pattern="HH'h'mm''ss - dd/MM/yyyy" /></p>
+							<p>${article.dateFinEnchere }</p>
 						</div>
 					</div>
 					<div class="row">
@@ -158,14 +158,10 @@
 								<input type="number" class="form-control" id="proposition"
 									name="proposition" min="<p>${article.enchere.montant_enchere }</p>" placeholder="" required>
 							</div>
+							<div class="col-md-4 mb-3">
+									<input type="submit" value ="Enchérir">
+							</div>
 							
-							<!-- si la date de fin d'enchere est antérieur a la date du jour : -->
-							<c:if test="${article.dateFinEncheres < localDateTime.now } ">
-			 
-								<div class="col-md-4 mb-3">
-									<button class="btn btn-primary btn-lg btn-block" type="submit">Enchérir</button>
-								</div>
-							</c:if>
 						</div>
 					</form>
 
