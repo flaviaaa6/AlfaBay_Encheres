@@ -35,11 +35,11 @@
 			<nav
 				class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
 				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/accueil"> <img
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/accueil"> <img
 					class="small-icon" src="../images/trocenchere.png"
 					alt="Accueil ENI-Encheres" height="50" width="50"> <strong>Alfa-Bay
 						Encheres</strong>
-				</a> <a class="navbar-brand" href="/affichage" alt="Gérer mon profil"
+				</a> <a class="navbar-brand" href="${pageContext.request.contextPath}/affichage" alt="Gérer mon profil"
 					title="Gérer mon profil"> <img class="small-icon"
 					src="../images/user.png" height="50" width="50"> <span class="align-middle text-muted">${utilisateurCnx.pseudo },
 						crédit : ${utilisateurCnx.credit } </span>

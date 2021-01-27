@@ -155,6 +155,7 @@ public ArticleVendu selectByName(String nomArticle) throws Exception {
 				if(rs.next())
 				{					
 					detailArticle.setNomArticle(rs.getString("nom_article"));
+					detailArticle.setDescription(rs.getString("description"));
 					detailArticle.setMiseAPrix(rs.getInt("prix_initial"));
 					detailArticle.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()), rs.getTime("date_debut_enchere").toLocalTime()));
 					detailArticle.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()), rs.getTime("date_fin_enchere").toLocalTime()));
@@ -167,7 +168,7 @@ public ArticleVendu selectByName(String nomArticle) throws Exception {
 					
 					Enchere enchere = new Enchere();
 					enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime()));
-					enchere.setMontantEnchère(rs.getInt("montant_enchere"));
+					enchere.setMontantEnchere(rs.getInt("montant_enchere"));
 					detailArticle.setEnchere(enchere);
 					
 					Retrait retrait = new Retrait();

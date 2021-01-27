@@ -17,7 +17,7 @@ import exceptions.BuisnessException;
 
 public class EnchereDAO {
 
-	private static final String INSERT = " INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere"
+	private static final String INSERT = " INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) "
 			+ "VALUES (?,?,?,?)";
 	
 	private  final  static  String ENCHERESOUVERTES =	"select * from  ENCHERES e"
@@ -26,20 +26,23 @@ public class EnchereDAO {
 											
 	public void insert(Enchere enchere) throws SQLException {
 		
-		
+		Connection cnx;
 		PreparedStatement pstmt;
-		ResultSet rs;
+		
 	
 		try {
-			Connection cnx = ConnectionProvider.getConnection();
+			cnx = ConnectionProvider.getConnection();
 			pstmt = cnx.prepareStatement(INSERT);
 			
-			pstmt.setInt(1, enchere.getNoUtilisateur());
-			pstmt.setInt(2, enchere.getNoArticle());
+			
+			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+		
+			
+			pstmt.setInt(2, enchere.getArticle().getNoArticle());
 			
 			//pstmt.setLocalDateTime(3, enchere.getDateEnchere().toLocalDate(),enchere.getDateEnchere().toLocalTime());
 			pstmt.setTimestamp(3, Timestamp.valueOf(enchere.getDateEnchere()));
-			pstmt.setInt(4, enchere.getMontantEnchère());
+			pstmt.setInt(4, enchere.getMontantEnchere());
 			
 			pstmt.executeUpdate();
 			
@@ -48,6 +51,12 @@ public class EnchereDAO {
 			be.ajouterErreur("Problème d'insertion de l'enchere dans la base. Cause :" + e.getMessage());
 			throw e;
 	
+		}
+		try {
+			if (pstmt != null ) pstmt.close();
+			if (cnx != null ) cnx.close();
+		} catch ( SQLException e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -110,7 +119,7 @@ public class EnchereDAO {
 				enchere.setArticleVendu(article);
 				
 				enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()), rs.getTime("date_debut_enchere").toLocalTime()));
-				enchere.setMontantEnchère(rs.getInt("montant_enchere"));;
+				enchere.setMontantEnchere(rs.getInt("montant_enchere"));;
 				
 				listeEnchere.add(enchere);
 				

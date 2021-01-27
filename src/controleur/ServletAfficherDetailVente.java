@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import bo.ArticleVendu;
 import bo.Enchere;
 import bo.Utilisateur;
+import exceptions.BuisnessException;
 import manager.ArticleVenduManager;
 import manager.EnchereManager;
 
@@ -25,6 +26,7 @@ import manager.EnchereManager;
 public class ServletAfficherDetailVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ArticleVendu articleDetail = new ArticleVendu();
+	ArticleVenduManager managerAV = new ArticleVenduManager();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,9 +52,9 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		
 		//appel au manager pour la fonction selectByID
 		
-		ArticleVenduManager manager = new ArticleVenduManager();
+		
 		try {
-			articleDetail = manager.selectByName(nomArticle);
+			articleDetail = managerAV.selectByName(nomArticle);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,6 +74,7 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		
 		String propositionStr = request.getParameter("proposition");	
 		int proposition = Integer.parseInt(propositionStr);
+		String message = null;
 		
 		// recuperation de l'utilisateur
 		
@@ -80,24 +83,40 @@ public class ServletAfficherDetailVente extends HttpServlet {
 				
 		//création de l'enchere a inséré : 
 		Enchere enchere = new Enchere();
-		enchere.setMontantEnchère(proposition);
+		enchere.setMontantEnchere(proposition);
 		
 		
-		enchere.setNoUtilisateur(utilisateurCnx.getNoUtilisateur());
+		enchere.setUtilisateur(utilisateurCnx);
 		enchere.setDateEnchere(LocalDateTime.now());
-		enchere.setNoArticle(articleDetail.getNoArticle());
+		enchere.setArticleVendu(articleDetail);
 		
 		EnchereManager manager = new EnchereManager();
-		try {
-			manager.insererEnchere(enchere);
-		} catch (SQLException e) {
+		
+			try {
+				manager.insererEnchere(enchere, articleDetail.getEnchere().getMontantEnchere());
+			} catch (BuisnessException | SQLException e) {
+				// TODO Auto-generated catch block
+			
+			message = "erreur, l'enchère n'a pas été validée";
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
+			message = "enchère enregistrée";
+
+			try {
+				articleDetail = managerAV.selectByName(articleDetail.getNomArticle());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		request.setAttribute("message", message);		
+		request.setAttribute("article", articleDetail);
 		
-		doGet(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ventearticles/detailsvente.jsp");
+		rd.forward(request, response);
 	}
 
 }

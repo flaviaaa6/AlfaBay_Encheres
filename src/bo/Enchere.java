@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Enchere {
 	private LocalDateTime dateEnchere;
-	private int montantEnchère;
+	private int montantEnchere;
 	private Utilisateur utilisateur;
 	private ArticleVendu articleVendu;
 	/**
@@ -17,10 +17,10 @@ public class Enchere {
 	 * @param dateEnchere
 	 * @param montantEnchère
 	 */
-	public Enchere(LocalDateTime dateEnchere, int montantEnchère) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchere) {
 		super();
 		this.dateEnchere = dateEnchere;
-		this.montantEnchère = montantEnchère;
+		this.montantEnchere = montantEnchere;
 	}
 	
 	/**
@@ -29,10 +29,10 @@ public class Enchere {
 	 * @param noUtilisateur
 	 * @param noArticle
 	 */
-	public Enchere(LocalDateTime dateEnchere, int montantEnchère, Utilisateur utilisateur, ArticleVendu noArticle) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu noArticle) {
 		super();
 		this.dateEnchere = dateEnchere;
-		this.montantEnchère = montantEnchère;
+		this.montantEnchere = montantEnchere;
 		this.utilisateur = utilisateur;
 		this.articleVendu = noArticle;
 	}
@@ -52,14 +52,14 @@ public class Enchere {
 	/**
 	 * @return the montantEnchère
 	 */
-	public int getMontantEnchère() {
-		return montantEnchère;
+	public int getMontantEnchere() {
+		return montantEnchere;
 	}
 	/**
 	 * @param montantEnchère the montantEnchère to set
 	 */
-	public void setMontantEnchère(int montantEnchère) {
-		this.montantEnchère = montantEnchère;
+	public void setMontantEnchere(int montantEnchere) {
+		this.montantEnchere = montantEnchere;
 	}
 	/**
 	 * @return the noUtilisateur

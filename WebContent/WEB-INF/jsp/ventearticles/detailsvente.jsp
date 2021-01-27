@@ -36,12 +36,13 @@
 			<nav
 				class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
 				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/accueil"> <img class="small-icon"
-					src="/images/trocenchere.png" alt="Accueil ENI-Encheres"> <strong>Alfa-Bay
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/accueil"> <img
+					class="small-icon" src="../images/trocenchere.png"
+					alt="Accueil ENI-Encheres" height="50" width="50"> <strong>Alfa-Bay
 						Encheres</strong>
-				</a> <a class="navbar-brand" href="/affichage" alt="Gérer mon profil"
+				</a> <a class="navbar-brand" href="${pageContext.request.contextPath}/affichage" alt="Gérer mon profil"
 					title="Gérer mon profil"> <img class="small-icon"
-					src="images/user.png"> <span class="align-middle text-muted">${utilisateurCnx.pseudo },
+					src="../images/user.png" height="50" width="50"> <span class="align-middle text-muted">${utilisateurCnx.pseudo },
 						crédit : ${utilisateurCnx.credit } </span>
 				</a>
 			</nav>
@@ -84,12 +85,12 @@
 
 
 					<div class="col-md-9 mb-3">
-						<p>${article.nomArticle }</p>
+						<h2>${article.nomArticle }</h2>
 
 					</div>
 
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Description :</p>
 						</div>
 						<div class="col-md-9 mb-3">
@@ -98,7 +99,7 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Categorie</p>
 						</div>
 						<div class="col-md-9 mb-3">
@@ -108,15 +109,15 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Meilleure offre :</p>
 						</div>
 						<div class="col-md-4 mb-3">
-							<p>.${article.enchere.montant_enchere }</p>
+							<p>${article.enchere.montantEnchere }</p>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Mise a prix :</p>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -124,7 +125,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Fin de l'enchère :</p>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -132,7 +133,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Retrait :</p>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -142,7 +143,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3 mb-3">
+						<div class="col-md-4 mb-3">
 							<p>Vendeur :</p>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -151,12 +152,12 @@
 					</div>
 					<form action="${pageContext.request.contextPath}/detail/vente" method="post">
 						<div class="row">
-							<div class="col-md-3 mb-3">
+							<div class="col-md-4 mb-3">
 								<label for="proposition">Ma proposition</label>
 							</div>
 							<div class="col-md-3 mb-3">
 								<input type="number" class="form-control" id="proposition"
-									name="proposition" min="<p>${article.enchere.montant_enchere }</p>" placeholder="" required>
+									name="proposition" min="<p>${article.enchere.montantEnchere }</p>" placeholder="" required>
 							</div>
 							<div class="col-md-4 mb-3">
 									<input type="submit" value ="Enchérir">
