@@ -13,25 +13,34 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link type="text/css" rel="stylesheet" href="css/normal.css" />
+<link type="text/css" rel="stylesheet" href="css/style.css" />
 
 <title>Profil utilisateur</title>
 </head>
 <body>
 
-	<div class="container" style="text-align: center">
-<%-- 
-		<c:if test="${empty sessionScope.utilisateurCnx.pseudo }">
-			<p style="color: red">Connectez-vous d'abord avant d'utiliser
-				cette page</p>
-			<a href="${pageContext.request.contextPath}/connect"> <input
-				type="button" value="Se connecter" />
+	<!--emptyHeader-->
+	<header>
+		<nav
+			class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
+			<!-- Brand/logo -->
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/accueil"> <img
+				class="small-icon" src="images/trocenchere.png"
+				alt="Accueil AlfaBay-Encheres"> <strong>AlfaBay_Encheres</strong>
+			</a> <a class="navbar-brand" href="#" alt="Gérer mon profil"
+				title="Gérer mon profil"> <img class="small-icon"
+				src="images/user.png" alt=""> <span
+				class="align-middle text-muted">XXXXX xxx, 0 crédit(s)</span>
 			</a>
-		</c:if>
---%>
-		<fieldset>
-			<legend>Informations sur l'utilisateur</legend>
-			<h2 style="text-align: center">
+		</nav>
+	</header>
+	<br><br><br><br>
+	<div class="container">
+
+		<main style="text-align: center">
+			
+			<h2>
 				<span>Pseudo : </span> ${utilisateurCnx.pseudo }
 			</h2>
 
@@ -58,13 +67,13 @@
 			</p>
 
 			<c:if test="${!empty sessionScope.utilisateurCnx.pseudo }">
-				<a href="${pageContext.request.contextPath}/profil"> <input
-					type="submit" value="Modifer" />
+				<a href="${pageContext.request.contextPath}/profil">
+					<input type="submit" value="Modifer" />
 				</a>
 			</c:if>
 
-		</fieldset>
-
+			
+		</main>
 	</div>
 </body>
 </html>
