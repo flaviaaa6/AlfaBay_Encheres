@@ -97,12 +97,15 @@
 			<div class="col-4" style="text-align:center"> 
 				<form class="form-login"
 					action="${pageContext.request.contextPath}/connect" method="post">
-					<label for="inputIdentifiant" class="sr-only">Identifiant</label> <input
-						type="text" id="inputIdentifiant" class="form-control"
-						name="pseudo" placeholder="Pseudo" required autofocus> <label
+					<label for="inputIdentifiant" class="sr-only">Identifiant</label>
+					 <input type="text" id="inputIdentifiant" class="form-control"
+						name="pseudo" 
+						value =  "${cookie['identite'].value }" placeholder = "pseudo" required autofocus> 
+						<label
+						
 						for="inputPassword" class="sr-only">Mot de passe</label> <input
 						type="password" id="inputPassword" class="form-control"
-						name="password" placeholder="Mot de passe" required>
+						name="password"  value="" required>
 					<div class="checkbox mb-3">
 						<label> <input type="checkbox" name="remember"
 							value="remember"> Se souvenir de moi

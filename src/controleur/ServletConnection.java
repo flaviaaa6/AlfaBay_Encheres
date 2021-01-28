@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,15 +42,23 @@ public class ServletConnection extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pseudo = request.getParameter("pseudo");
-		String password = request.getParameter("password");
-	
-		String message = null;
-		
-		Utilisateur utilisateur = new Utilisateur(pseudo, password);
-		
-		Utilisateur utilisateurCnx = null;
-		
+		String password = request.getParameter("password");	
+		String message = null;		
+		Utilisateur utilisateur = new Utilisateur(pseudo, password);		
+		Utilisateur utilisateurCnx = null;		
 		UtilisateurManager mgr = new UtilisateurManager();
+		
+		if (request.getParameter("remember") != null) {
+			//créer le cookie.... encoder la valeur String au format HTML
+			Cookie cookie = new Cookie("identite", pseudo);
+			cookie.setMaxAge(-1); //détruit à la fermeture du navigateur
+			cookie.setHttpOnly(true);
+			cookie.setComment("pseudo de l'utilisateur");
+			
+			
+			
+		}
+		
 		try {
 			utilisateurCnx = mgr.verifier(utilisateur);
 		} catch (Exception e) {
