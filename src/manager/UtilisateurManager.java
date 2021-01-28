@@ -174,29 +174,16 @@ public class UtilisateurManager {
 	
 	public void deleteUtilisateur(int numUtilisateur) throws BuisnessException {
 		
-		int utilisateur = 0;
-		try {
-			deleteUtilisateur(utilisateur);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			exception.ajouterErreur(e.getMessage());
-		}
+		//int utilisateur = 0;
 		
-		//si les données sont validées
-		if (!exception.hasErreurs()) {
+		
+	
+		dao.deleteUtilisateur(numUtilisateur);
 			
-			try {
-				dao.deleteUtilisateur(utilisateur);
-			} catch (Exception e) {
-				exception.ajouterErreur(e.getMessage());
-			}
-		}
+			
 				
-		//si des erreurs ont été détectées
-		if (exception.hasErreurs()) {
-			//propager la BuisnessException à la servlet
-			throw exception;
-		}
+		
+		
 	}
 	
 	/*	
@@ -205,7 +192,7 @@ public class UtilisateurManager {
 		return this.utilisateurCnx;
 	}
 */
-	public Utilisateur trouver(int id) throws BuisnessException {
+	/*public Utilisateur trouver(int id) throws BuisnessException {
 		
 		
 		Utilisateur utilisateur = null;
@@ -213,6 +200,6 @@ public class UtilisateurManager {
 		
 		return utilisateur;
 		
-	}
+	}*/
 
 }

@@ -39,7 +39,7 @@
 					<img class="small-icon" src="images/trocenchere.png"
 					alt="Accueil AlfaBay-Encheres"> <strong>AlfaBay_Encheres</strong>
 				</a> 
-				<a class="navbar-brand" href="#" alt="Gérer mon profil"
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/affichage" alt="Gérer mon profil"
 					title="Gérer mon profil"> 
 					<img class="small-icon" src="images/user.png" alt=""> 
 					<span class="align-middle text-muted">${utilisateurCnx.pseudo },
@@ -166,7 +166,7 @@
 				<hr class="mb-4">
 
 				<button class="btn btn-primary btn-lg btn-block" type="submit">Enregistrer</button>
-				<a class="btn btn-primary btn-lg btn-block" href="">Supprimer mon compte</a>
+				<a class="btn btn-primary btn-lg btn-block" href="${pageContext.request.contextPath}/suppression">Supprimer mon compte</a>
 
 			</form>
 		</main>

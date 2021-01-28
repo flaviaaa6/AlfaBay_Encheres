@@ -14,8 +14,8 @@ import exceptions.BuisnessException;
 public class UtilisateurDAO {
 
 	private static final String SELECT = "SELECT * FROM UTILISATEURS WHERE  pseudo = ? AND mot_de_passe = ? ";
-	private static final String INSERT = " INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe)" +
-			" VALUES (?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT = " INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)" +
+			" VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String SELECTBYID = "SELECT * UTILISATEURS WHERE no_utilisateur = ? "; 
 
 	private static final String UPDATE = "UPDATE UTILISATEURS SET "

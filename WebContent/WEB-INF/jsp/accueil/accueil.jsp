@@ -242,13 +242,19 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 									</div>
 									<ul class="col-9 list-unstyled p-2">
 										<li>Prix :${articleVendu.miseAPrix}</li>
-										<li>Meilleure enchère : 0 point(s)</li>
+										<li>Meilleure enchère : ${articleVendu.enchere.montantEnchere} point(s)</li>
 										<li>Fin de l'enchère :${articleVendu.dateFinEnchere}</li>
-										<li> Vendeur : 
-											<a href="${pageContext.request.contextPath }/autreutilisateur?pseudo=${articleVendu.utilisateur.pseudo}">
-													${articleVendu.utilisateur.pseudo}
-											</a>
-										</li>
+										<c:if test="${!empty sessionScope.utilisateurCnx}">
+											<li> Vendeur : 
+												<a href="${pageContext.request.contextPath }/autreutilisateur?pseudo=${articleVendu.utilisateur.pseudo}">
+														${articleVendu.utilisateur.pseudo}
+												</a>
+											</li>
+										</c:if>
+										<c:if test="${empty sessionScope.utilisateurCnx.pseudo}">
+											<li >Article : ${articleVendu.utilisateur.pseudo}</li>
+										</c:if>
+										
 									</ul>
 								</div>
 								<c:if test="${!empty sessionScope.utilisateurCnx.pseudo}">

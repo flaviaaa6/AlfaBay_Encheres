@@ -47,29 +47,30 @@ public class ServletSupprimerCompte extends HttpServlet {
 		HttpSession session = request.getSession();
 
         Utilisateur utilisateurCnx = (Utilisateur) session.getAttribute("utilisateurCnx");
-		int utilisateur = utilisateurCnx.getNoUtilisateur();
+		int numUtilisateur = utilisateurCnx.getNoUtilisateur();
 		
 		UtilisateurManager mgr = new UtilisateurManager();
 		
 		String message = null;
+		session.invalidate();
 		try {
-			mgr.deleteUtilisateur(utilisateur);
+			mgr.deleteUtilisateur(numUtilisateur);
 		} catch (BuisnessException e) {
 			request.setAttribute("erreurs", e.getListeMessagesErreur());
 			message = "Erreur, l'utilisateur n'a pas été supprimé !";
 		}
 		
-		if (utilisateur != 0) {
-			message = "La suppression est terminée avec succès";
-			session.setAttribute("utilisateurCnx", utilisateur);
-		}
+	
+		message = "La suppression est terminée avec succès";
+		
+		
 		
 		request.setAttribute("message", message);
 		
 
-		request.setAttribute("utilisateur", utilisateur);
+		//request.setAttribute("utilisateur", numUtilisateur);
 		
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil/accueil.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil/modifierProfil.jsp");
 		rd.forward(request, response);
 	}
 
