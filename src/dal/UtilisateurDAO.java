@@ -208,10 +208,8 @@ public class UtilisateurDAO {
 		}
 	}
 	
-	public Utilisateur autreUtilisateur(String pseudo) { 
+	public Utilisateur autreUtilisateur(String pseudo) throws BuisnessException { 
 
-		
-		
 		Utilisateur autreUtilisateur = null;
 		Connection cnx = null;
 		PreparedStatement pstmt;
@@ -234,17 +232,21 @@ public class UtilisateurDAO {
 				autreUtilisateur.setTelephone(rs.getString("telephone"));
 				autreUtilisateur.setRue(rs.getString("rue"));
 				autreUtilisateur.setCodePostal(rs.getString("code_postal"));
-
+				autreUtilisateur.setVille(rs.getString("ville"));
 				
 			} 
 		} catch ( SQLException e ) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			BuisnessException be = new BuisnessException();
+			be.ajouterErreur("Pas d'utilisateur dans la base  à ce pseudo. Cause :" + e.getMessage());
+			throw be;
 		}
 		return autreUtilisateur;
 	}
 
-	public void delete(int id) {
+
+	public void deleteUtilisateur(int id) throws BuisnessException {
 
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
@@ -254,6 +256,9 @@ public class UtilisateurDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			BuisnessException be = new BuisnessException();
+			be.ajouterErreur("Problème de suppression de l'utilisateur dans la base. Cause :" + e.getMessage());
+			throw be;
 		}
 
 	}

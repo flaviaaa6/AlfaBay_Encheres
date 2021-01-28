@@ -1,30 +1,26 @@
 package controleur;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bo.Utilisateur;
-import exceptions.BuisnessException;
-import manager.UtilisateurManager;
-
 /**
- * Servlet implementation class ServletAutreProfil
+ * Servlet implementation class ServletExpirationDelai
  */
-@WebServlet("/autreutilisateur")
-public class ServletAfficherAutreProfil extends HttpServlet {
+@WebServlet("/delai")
+public class ServletExpirationDelai extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAfficherAutreProfil() {
+    public ServletExpirationDelai() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +30,16 @@ public class ServletAfficherAutreProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String pseudo = request.getParameter("pseudo");
-		Utilisateur utilisateur = null;
-		UtilisateurManager mgr = new UtilisateurManager();
+		// Créer un cookie et ajouter à la réponse
 		
-		try {
-			utilisateur = mgr.afficherAutreProfil(pseudo);
-		} catch (BuisnessException e) {
+		Cookie delaiCookie = new Cookie("delai", "duree");
+		response.addCookie(delaiCookie);
 		
-			e.printStackTrace();
-		}
+		// Définir l'âge maximal de 5 minutes
+		delaiCookie.setMaxAge(5*60*60);
 		
-		request.setAttribute("PseudoUser", utilisateur);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil/afficherAutreProfil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("path");
 		rd.forward(request, response);
-
 	}
 
 	/**

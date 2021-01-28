@@ -244,14 +244,18 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 										<li>Prix :${articleVendu.miseAPrix}</li>
 										<li>Meilleure enchère : 0 point(s)</li>
 										<li>Fin de l'enchère :${articleVendu.dateFinEnchere}</li>
-										<li>Vendeur : ${articleVendu.utilisateur.pseudo}</li>
+										<li> Vendeur : 
+											<a href="${pageContext.request.contextPath }/autreutilisateur?pseudo=${articleVendu.utilisateur.pseudo}">
+													${articleVendu.utilisateur.pseudo}
+											</a>
+										</li>
 									</ul>
 								</div>
 								<c:if test="${!empty sessionScope.utilisateurCnx.pseudo}">
-								<a class="mt-3 btn btn-lg btn-block btn-primary" href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
-									title="faire une enchère"> <img class="small-icon"
-									src="images/bid.png">
-								</a>
+									<a class="mt-3 btn btn-lg btn-block btn-primary" href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
+										title="faire une enchère">
+										<img class="small-icon" src="images/bid.png" alt="">
+									</a>
 								</c:if>
 							</div>
 						</div>

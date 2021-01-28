@@ -166,23 +166,30 @@ public class UtilisateurManager {
 	public Utilisateur afficherAutreProfil(String pseudo) throws BuisnessException {
 		
 		Utilisateur autreUtilisateur = null;
+
+		autreUtilisateur = dao.autreUtilisateur(pseudo);
+		
+		return autreUtilisateur;
+	}
+	
+	public void deleteUtilisateur(int numUtilisateur) throws BuisnessException {
+		
+		int utilisateur = 0;
 		try {
-			validerPseudo(pseudo);
+			deleteUtilisateur(utilisateur);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			exception.ajouterErreur(e.getMessage());
 		}
 		
-	
 		//si les données sont validées
 		if (!exception.hasErreurs()) {
 			
 			try {
-				autreUtilisateur = dao.autreUtilisateur(pseudo);
+				dao.deleteUtilisateur(utilisateur);
 			} catch (Exception e) {
 				exception.ajouterErreur(e.getMessage());
-			} 
-			
+			}
 		}
 				
 		//si des erreurs ont été détectées
@@ -190,8 +197,6 @@ public class UtilisateurManager {
 			//propager la BuisnessException à la servlet
 			throw exception;
 		}
-		
-		return autreUtilisateur;
 	}
 	
 	/*	
