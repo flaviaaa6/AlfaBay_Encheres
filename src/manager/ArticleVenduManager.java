@@ -55,21 +55,21 @@ public class ArticleVenduManager {
 		return detailArticle;
 	}
 	
-	public List<ArticleVendu> SelectMyEncours(Utilisateur pseudo) throws SQLException{
+	public List<ArticleVendu> SelectMyEncours(String pseudo) throws SQLException{
 		List<ArticleVendu> vEncours = new ArrayList<ArticleVendu>();
 		vEncours =dao.SelectMyEncours(pseudo);
 		
 		return vEncours;
 	}
 	
-	public List<ArticleVendu> SelectNoBegin(Utilisateur pseudo) throws SQLException{
+	public List<ArticleVendu> SelectNoBegin(String pseudo) throws SQLException{
 		List<ArticleVendu> vNoBegin = new ArrayList<ArticleVendu>();
 		vNoBegin=dao.selectNoBegin(pseudo);
 		
 		return vNoBegin;
 	}
 	
-	public List<ArticleVendu>  SelectFinish(Utilisateur pseudo) throws SQLException{
+	public List<ArticleVendu>  SelectFinish(String pseudo) throws SQLException{
 		List<ArticleVendu> vFinish = new ArrayList<ArticleVendu>();
 		vFinish=dao.selectFinish(pseudo);
 		
@@ -84,14 +84,14 @@ public class ArticleVenduManager {
 		
 	}
 	
-	public List<ArticleVendu> Select_By_Pseudo(Utilisateur pseudo) throws SQLException{
+	public List<ArticleVendu> Select_By_Pseudo(String pseudo) throws SQLException{
 		List<ArticleVendu> enchereByPseudo = new ArrayList<ArticleVendu>();
 		enchereByPseudo=dao.selectByPseudo(pseudo);
 		
 		return enchereByPseudo;
 	}
 	
-	public List<ArticleVendu> Select_Win(Utilisateur pseudo) throws SQLException{
+	public List<ArticleVendu> Select_Win(String pseudo) throws SQLException{
 		List<ArticleVendu> enchereWin = new ArrayList<ArticleVendu>();
 		enchereWin=dao.select_Win(pseudo);
 		

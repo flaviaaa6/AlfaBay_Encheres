@@ -23,11 +23,14 @@ public class ArticleVenduDAO {
 			+ " date_fin_enchere, prix_initial, no_categorie, no_utilisateur, etat_vente)" +
 			" VALUES (?,?,?,?,?,?,?,?)";
 	
-	private  final  static  String  SELECT =	"select * from ARTICLES_VENDUS a "
-			+	"INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie "
-			+	"INNER JOIN UTILISATEURS u ON  u.no_utilisateur=a.no_utilisateur "
-			+   "LEFT OUTER JOIN ENCHERES e ON e.no_article=a.no_article "
-			+	"where etat_vente = 'EC'"; 
+	private  final  static  String  SELECT =	"SELECT  a.no_article,nom_article,description,date_debut_enchere,date_fin_enchere,prix_initial,prix_vente,"
+            + " a.no_utilisateur as no_user,a.no_categorie,etat_vente,image,r.rue as arue,r.code_postal as acp,r.ville as aville, c.libelle, u.*, "
+            + " e.no_utilisateur as ec_no_utilisateur, e.date_enchere, e.montant_enchere, (SELECT pseudo FROM UTILISATEURS eu WHERE eu.no_utilisateur = e.no_utilisateur) as epseudo "
+            + "    FROM  (((ARTICLES_VENDUS a LEFT JOIN RETRAITS r ON a.no_article = r.no_article) "
+            + " LEFT JOIN CATEGORIES c ON c.no_categorie = a.no_categorie)"
+            + " LEFT JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur)"
+            + " LEFT JOIN ENCHERES e ON (a.no_article = e.no_article AND e.no_utilisateur = (SELECT TOP(1) ec.no_utilisateur FROM ENCHERES ec WHERE ec.no_article = a.no_article ORDER BY date_enchere DESC))";
+
 	
 	private static final String SELECTBYNAME =" SELECT * from ARTICLES_VENDUS a " 
 			+ " LEFT OUTER JOIN ENCHERES e ON e.no_article=a.no_article " 
@@ -239,7 +242,7 @@ public ArticleVendu selectByName(String nomArticle) throws Exception {
 	}
 	
 
-public List <ArticleVendu> SelectMyEncours(Utilisateur pseudo) throws SQLException {
+public List <ArticleVendu> SelectMyEncours(String pseudo) throws SQLException {
 	List <ArticleVendu> vMyEncours = new ArrayList <ArticleVendu>();
 	ArticleVendu myEncours = new ArticleVendu();
 	
@@ -276,7 +279,7 @@ public List <ArticleVendu> SelectMyEncours(Utilisateur pseudo) throws SQLExcepti
 
 
 
-public List <ArticleVendu> selectNoBegin(Utilisateur pseudo) throws SQLException{
+public List <ArticleVendu> selectNoBegin(String pseudo) throws SQLException{
 	List <ArticleVendu> vNoBegin = new ArrayList <ArticleVendu>();
 	ArticleVendu noBegin= new ArticleVendu();
 	
@@ -308,7 +311,7 @@ public List <ArticleVendu> selectNoBegin(Utilisateur pseudo) throws SQLException
 }
 
 
-public List <ArticleVendu> selectFinish(Utilisateur pseudo) throws SQLException{
+public List <ArticleVendu> selectFinish(String pseudo) throws SQLException{
 
 	ArticleVendu finish = new ArticleVendu();
 	List <ArticleVendu> vFinish = new ArrayList <ArticleVendu>();
@@ -378,7 +381,7 @@ public List <ArticleVendu> SelectOpen() throws SQLException {
 
 
 
-public List <ArticleVendu> selectByPseudo( Utilisateur pseudo) throws SQLException{
+public List <ArticleVendu> selectByPseudo( String pseudo) throws SQLException{
 
 	List <ArticleVendu> enchereByPseudo = new ArrayList<ArticleVendu> ();
 	ArticleVendu article  = new ArticleVendu ();
@@ -388,6 +391,8 @@ public List <ArticleVendu> selectByPseudo( Utilisateur pseudo) throws SQLExcepti
 	try {
 		cnx = ConnectionProvider.getConnection();
 		PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
+		
+		 stmt.setString(1, pseudo);
 		rs = stmt . executeQuery ();
 		
 		if(rs.next())
@@ -415,7 +420,7 @@ public List <ArticleVendu> selectByPseudo( Utilisateur pseudo) throws SQLExcepti
 }
 
 
-public List <ArticleVendu> select_Win(Utilisateur pseudo) throws SQLException{
+public List <ArticleVendu> select_Win(String pseudo) throws SQLException{
 	List <ArticleVendu> enchereWin = new ArrayList<ArticleVendu> ();
 	ArticleVendu articleWin  = new ArticleVendu ();
 
@@ -424,6 +429,8 @@ public List <ArticleVendu> select_Win(Utilisateur pseudo) throws SQLException{
 	try {
 		cnx = ConnectionProvider.getConnection();
 		PreparedStatement stmt = cnx.prepareStatement(SELECT_WIN);
+		
+		stmt.setString(1, pseudo);
 		rs = stmt . executeQuery ();
 		if(rs.next())
 		{	
