@@ -23,19 +23,15 @@ public class ArticleVenduManager {
 		
 		//creation de l'objet article:
 		ArticleVendu article = new ArticleVendu(nom, description,  dateDebut, dateFin, prixInit, utilisateur, categorie);
-		
+	
 		//envoi a la dal:
 		dao = new ArticleVenduDAO();
-		
-		
 		article = dao.insert(article);
 		
-			
 		return article;
 	
 	}
 
-	
 
 	public List<ArticleVendu> select() throws SQLException{
 		List<ArticleVendu> listeArticlesVendus = new ArrayList<ArticleVendu>();
@@ -47,12 +43,53 @@ public class ArticleVenduManager {
 	
 	
 	public ArticleVendu selectByName(String nomArticle) throws Exception {
-		
 		ArticleVendu detailArticle = new ArticleVendu();
 		detailArticle = dao.selectByName(nomArticle);
 		
 		return detailArticle;
+	}
+	
+	public List<ArticleVendu> SelectMyEncours(Utilisateur pseudo) throws SQLException{
+		List<ArticleVendu> vEncours = new ArrayList<ArticleVendu>();
+		vEncours =dao.SelectMyEncours(pseudo);
 		
+		return vEncours;
+	}
+	
+	public List<ArticleVendu> SelectNoBegin(Utilisateur pseudo) throws SQLException{
+		List<ArticleVendu> vNoBegin = new ArrayList<ArticleVendu>();
+		vNoBegin=dao.selectNoBegin(pseudo);
+		
+		return vNoBegin;
+	}
+	
+	public List<ArticleVendu>  SelectFinish(Utilisateur pseudo) throws SQLException{
+		List<ArticleVendu> vFinish = new ArrayList<ArticleVendu>();
+		vFinish=dao.selectFinish(pseudo);
+		
+		return vFinish;	
+	}
+	
+	public List<ArticleVendu> SelectOpen() throws SQLException{
+		List<ArticleVendu>  enchereAll = new ArrayList<ArticleVendu>();
+		enchereAll =dao.SelectOpen();
+		
+		return enchereAll;
+		
+	}
+	
+	public List<ArticleVendu> Select_By_Pseudo(Utilisateur pseudo) throws SQLException{
+		List<ArticleVendu> enchereByPseudo = new ArrayList<ArticleVendu>();
+		enchereByPseudo=dao.selectByPseudo(pseudo);
+		
+		return enchereByPseudo;
+	}
+	
+	public List<ArticleVendu> Select_Win(Utilisateur pseudo) throws SQLException{
+		List<ArticleVendu> enchereWin = new ArrayList<ArticleVendu>();
+		enchereWin=dao.select_Win(pseudo);
+		
+		return enchereWin;	
 	}
 
 }

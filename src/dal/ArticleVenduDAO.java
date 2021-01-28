@@ -37,7 +37,39 @@ public class ArticleVenduDAO {
 			+ " WHERE nom_article = ? "
 			+ " ORDER BY date_enchere DESC";
 
+	private  final  static  String SELECT_MY_ENCOURS =	"select * from ARTICLES_VENDUS a "
+			+	"RIGHT OUTER JOIN UTILISATEURS u ON  u.no_utilisateur=a.no_utilisateur "
+			+ 	"WHERE etat_vente = 'EC' "
+			+ 	"ORDER BY date_fin_enchere DESC ";		
 
+	private static final String SELECT_NO_BEGIN = "select * from ARTICLES_VENDUS a "
+			+	"RIGHT OUTER JOIN UTILISATEURS u ON  u.no_utilisateur=a.no_utilisateur "
+			+ 	"WHERE GETDATE() < date_debut_enchere "
+			+ 	"ORDER BY date_debut_enchere DESC " ; 
+
+	private static final String SELECT_FINISH = 	"select * from ARTICLES_VENDUS a "
+			+	"RIGHT OUTER JOIN UTILISATEURS u ON  u.no_utilisateur=e.no_utilisateur "
+			+ 	"WHERE GETDATE() > date_fin_enchere "
+			+ 	"ORDER BY date_fin_enchere DESC "; 
+
+
+	private  final  static  String ENCHERES_OUVERTES =	"select * from ENCHERES e "
+			+	"LEFT OUTER JOIN  ARTICLES_VENDUS a ON a.no_article=e.no_article "
+			+	"RIGHT JOIN UTILISATEURS u ON  u.no_utilisateur=e.no_utilisateur "
+			+ 	"ORDER BY date_debut_enchere DESC "
+			+ 	"WHERE (GETDATE() BETWEEN date_debut_enchere AND date_fin_enchere)";
+
+	private static final String SELECT_BY_PSEUDO = "select * from ENCHERES e "
+			+	"LEFT OUTER JOIN  ARTICLES_VENDUS a ON a.no_article=e.no_article "
+			+	"INNER JOIN UTILISATEURS u ON  u.no_utilisateur=e.no_utilisateur "
+			+ 	"where pseudo = '?' AND montant_enchere != NULL AND prix_vente = NULL";
+
+	private static final String SELECT_WIN = 	"select * from ENCHERES e "
+			+	"LEFT OUTER JOIN  ARTICLES_VENDUS a ON a.no_article=e.no_article "
+			+	"INNER JOIN UTILISATEURS u ON  u.no_utilisateur=e.no_utilisateur "
+			+ 	"where pseudo = '?' AND montant_enchere != NULL ";
+	
+	
 	public ArticleVendu insert(ArticleVendu article) throws SQLException {
 		
 		
@@ -205,4 +237,217 @@ public ArticleVendu selectByName(String nomArticle) throws Exception {
 			return detailArticle;
 	}
 	
+
+public List <ArticleVendu> SelectMyEncours(Utilisateur pseudo) throws SQLException {
+	List <ArticleVendu> vMyEncours = new ArrayList <ArticleVendu>();
+	ArticleVendu myEncours = new ArticleVendu();
+	
+	Connection cnx = null;
+	ResultSet rs = null;
+	try {
+		cnx = ConnectionProvider.getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(SELECT_MY_ENCOURS);
+		rs = stmt . executeQuery ();
+
+		while (rs . next ()) {
+			Utilisateur vendeur = new Utilisateur();
+			vendeur.setPseudo(rs.getString ("pseudo"));
+			myEncours.setUtilisateur(vendeur);
+
+			myEncours.setNomArticle(rs.getString("nom_article"));
+			myEncours.setMiseAPrix(rs.getInt("prix_initial"));
+			myEncours.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()), rs.getTime("date_debut_enchere").toLocalTime()));
+			myEncours.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()), rs.getTime("date_fin_enchere").toLocalTime()));
+
+			vMyEncours.add(myEncours);
+		}
+	} catch ( SQLException e) {		
+		e.printStackTrace();
+	}
+	try {
+		if (cnx != null ) cnx.close();
+	} catch ( SQLException e) {
+		e.printStackTrace();
+	}
+	return vMyEncours;	
+
+}
+
+
+
+public List <ArticleVendu> selectNoBegin(Utilisateur pseudo) throws SQLException{
+	List <ArticleVendu> vNoBegin = new ArrayList <ArticleVendu>();
+	ArticleVendu noBegin= new ArticleVendu();
+	
+	Connection cnx = null;
+	ResultSet rs = null;
+	try {
+		cnx = ConnectionProvider.getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(SELECT_NO_BEGIN);
+		rs = stmt . executeQuery ();
+		
+		while(rs.next())
+		{	
+			noBegin.setNomArticle(rs.getString("nom_article"));
+			noBegin.setMiseAPrix(rs.getInt("prix_initial"));
+			noBegin.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime()));
+			noBegin.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()),rs.getTime("date_fin_enchere").toLocalTime()));
+
+			Utilisateur vendeur = new Utilisateur();
+			vendeur.setPseudo(rs.getString ("pseudo"));
+			noBegin.setUtilisateur(vendeur);
+
+			vNoBegin.add(noBegin);
+		}
+	} catch (SQLException e) {
+
+	}
+
+	return vNoBegin;
+}
+
+
+public List <ArticleVendu> selectFinish(Utilisateur pseudo) throws SQLException{
+
+	ArticleVendu finish = new ArticleVendu();
+	List <ArticleVendu> vFinish = new ArrayList <ArticleVendu>();
+
+	Connection cnx = null;
+	ResultSet rs = null;
+	try {
+		cnx = ConnectionProvider.getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(SELECT_FINISH);
+		rs = stmt . executeQuery ();
+		while(rs.next())
+		{	
+			finish.setNomArticle(rs.getString("nom_article"));
+			finish.setNomArticle(rs.getString ("prix_initial"));
+			finish.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime()));
+			finish.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()),rs.getTime("date_fin_enchere").toLocalTime()));
+
+			Utilisateur vendeur = new Utilisateur();
+			vendeur.setPseudo(rs.getString ("pseudo"));
+			finish.setUtilisateur(vendeur);
+			
+			vFinish.add(finish);
+
+		}
+	} catch (SQLException e) {
+
+	}
+
+	return vFinish;
+}
+
+
+public List <ArticleVendu> SelectOpen() throws SQLException {
+	List <ArticleVendu> listeArticle = new ArrayList <ArticleVendu> ();
+	ArticleVendu article = new ArticleVendu ();
+	
+	Connection cnx = null;
+	ResultSet rs = null;
+	try {
+		cnx = ConnectionProvider.getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(ENCHERES_OUVERTES);
+		rs = stmt . executeQuery ();
+		while (rs . next ()) {
+
+			
+			article.setNomArticle(rs.getString ("nom_article"));
+			article.setMiseAPrix(rs.getInt ("prix_initial"));
+			article.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()), rs.getTime("date_fin_enchere").toLocalTime()));
+
+			Utilisateur vendeur = new Utilisateur();
+			vendeur.setPseudo(rs.getString ("pseudo"));
+			article.setUtilisateur(vendeur);
+			
+			Enchere enchere = new Enchere();
+			enchere.setMontantEnchere(rs.getInt ("montant_enchere"));
+			article.setEnchere(enchere);
+
+			listeArticle.add(article);
+
+		}
+	} catch ( SQLException e) {		
+		e.printStackTrace();
+	}
+	return listeArticle;	
+
+}
+
+
+
+public List <ArticleVendu> selectByPseudo( Utilisateur pseudo) throws SQLException{
+
+	List <ArticleVendu> enchereByPseudo = new ArrayList<ArticleVendu> ();
+	ArticleVendu article  = new ArticleVendu ();
+
+	Connection cnx = null;
+	ResultSet rs = null;
+	try {
+		cnx = ConnectionProvider.getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
+		rs = stmt . executeQuery ();
+		
+		if(rs.next())
+		{	
+			article.setNomArticle(rs.getString("nom_article"));
+			article.setMiseAPrix(rs.getInt("prix_initial"));
+			article.setDateDebutEnchere(LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime()));
+			article.setDateFinEnchere(LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()),rs.getTime("date_fin_enchere").toLocalTime()));
+
+			Utilisateur acheteur = new Utilisateur();
+			acheteur.setPseudo(rs.getString ("pseudo"));
+			article.setUtilisateur(acheteur);
+			
+			Enchere encher = new Enchere();
+			encher.setMontantEnchere(rs.getInt("montant_enchere"));
+			encher.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()),rs.getTime("date_enchere").toLocalTime()));
+			article.setEnchere(encher);
+			
+		}
+	} catch (SQLException e) {
+
+	}
+
+	return enchereByPseudo;
+}
+
+
+public List <ArticleVendu> select_Win(Utilisateur pseudo) throws SQLException{
+	List <ArticleVendu> enchereWin = new ArrayList<ArticleVendu> ();
+	ArticleVendu articleWin  = new ArticleVendu ();
+
+	Connection cnx = null;
+	ResultSet rs = null;
+	try {
+		cnx = ConnectionProvider.getConnection();
+		PreparedStatement stmt = cnx.prepareStatement(SELECT_WIN);
+		rs = stmt . executeQuery ();
+		if(rs.next())
+		{	
+			articleWin.setNomArticle(rs.getString("nom_article"));
+			articleWin.setMiseAPrix(rs.getInt("prix_initial"));
+
+
+			Utilisateur acheteur = new Utilisateur();
+			acheteur.setPseudo(rs.getString ("pseudo"));
+			articleWin.setUtilisateur(acheteur);
+
+			Enchere encher = new Enchere();
+			encher.setMontantEnchere(rs.getInt("montant_enchere"));
+			encher.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()),
+					rs.getTime("date_enchere").toLocalTime()));
+			
+			articleWin.setEnchere(encher);
+			
+			enchereWin.add(articleWin);
+
+		}
+	} catch (SQLException e) {
+
+	}
+
+	return enchereWin;
+}
 }
