@@ -58,7 +58,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 								<span class="align-middle text-muted">BIENVENU(E)
 									${utilisateurCnx.pseudo}, ${utilisateurCnx.credit} credit(s)</span>
 			       	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			       	<a class="dropdown-item" href="#">Enchères</a>
+			       	<a class="dropdown-item" href="#">Administrer</a>
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/vente/add">Vendre
 									un article</a>
@@ -90,7 +90,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 							${utilisateurCnx.pseudo}, ${utilisateurCnx.credit} credit(s)</span>
        		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
        		<li class="nav-item d-none d-lg-block"><a class="nav-link"
-							href="#">Enchères</a></li>
+							href="#">Administrer</a></li>
 						<li class="nav-item d-none d-lg-block"><a class="nav-link"
 							href="${pageContext.request.contextPath}/vente/add">Vendre un article</a></li>
 						<a class="nav-link"
@@ -215,7 +215,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             </form>
 
 			<!--enchères-->
-
+		<c:if test="${empty sessionScope.utilisateurCnx.pseudo || !empty sessionScope.utilisateurCnx.pseudo }"> 
 				<c:forEach items="${listeArticlesVendus}" var="articleVendu">
 					<div class="row justify-content-center border-top card-deck">
 						<div class="col-12 col-sm-6 p-2">
@@ -269,6 +269,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				</c:forEach>
 			
 	        </div>
+	        </c:if>
         </main>
 
         <!--footer-->
