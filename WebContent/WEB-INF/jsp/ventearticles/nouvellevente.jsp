@@ -177,7 +177,7 @@
 							</div>
 							<div class="col-md-9 mb-3">
 								<input type="text" class="form-control" id="rue" name="rue"
-									placeholder="" maxlength="100" value="" required>
+									placeholder="" maxlength="100" value="${utilisateurCnx.rue }" required>
 								<div class="invalid-feedback">Ce champ est invalide !</div>
 
 
@@ -191,7 +191,7 @@
 							</div>
 							<div class="col-md-9 mb-3">
 								<input type="text" class="form-control" id="codePostal"
-									name="codePostal" placeholder="" required>
+									name="codePostal" value="${utilisateurCnx.codePostal }" required>
 								<div class="invalid-feedback">Ce champ est invalide ou les
 									mots de passe sont différents !</div>
 
@@ -206,7 +206,7 @@
 							</div>
 							<div class="col-md-9 mb-3">
 								<input type="text" class="form-control" id="ville" name="ville"
-									placeholder="" required>
+									value="${utilisateurCnx.ville }" required>
 								<div class="invalid-feedback">Ce champ est invalide ou les
 									mots de passe sont différents !</div>
 							</div>

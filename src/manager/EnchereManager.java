@@ -15,9 +15,15 @@ public class EnchereManager {
 	EnchereDAO dao = new EnchereDAO();
 	BuisnessException exception = new BuisnessException();
 	
-	public void insererEnchere(Enchere enchere, int ancienMontant) throws SQLException, BuisnessException {
+	public void insererEnchere(Enchere enchere, int ancienMontant, Utilisateur util) throws SQLException, BuisnessException {
 		try {
 			validerProposition(enchere.getMontantEnchere(), ancienMontant );
+		} catch (Exception e) {
+			exception.ajouterErreur(e.getMessage());
+		} 
+		
+		try {
+			validerCredit(util, enchere.getMontantEnchere());
 		} catch (Exception e) {
 			exception.ajouterErreur(e.getMessage());
 		} 
@@ -40,6 +46,16 @@ public class EnchereManager {
 		
 		
 		
+		
+	}
+
+	private void validerCredit(Utilisateur util, int montantEnchere) throws Exception {
+		int credit = util.getCredit();
+		
+		if(credit< montantEnchere) {
+			Exception e = new Exception("Le crédit n'est pas suffisant!");
+			throw e;
+		}
 		
 	}
 

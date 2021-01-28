@@ -93,7 +93,7 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		EnchereManager manager = new EnchereManager();
 		
 			try {
-				manager.insererEnchere(enchere, articleDetail.getEnchere().getMontantEnchere());
+				manager.insererEnchere(enchere, articleDetail.getEnchere().getMontantEnchere(), utilisateurCnx);
 			} catch (BuisnessException | SQLException e) {
 				// TODO Auto-generated catch block
 			

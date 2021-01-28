@@ -166,9 +166,13 @@ public ArticleVendu selectByName(String nomArticle) throws Exception {
 					categ.setLibelle(rs.getString("libelle"));
 					detailArticle.setCategorie(categ);
 					
-					Enchere enchere = new Enchere();
-					enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime()));
-					enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+					
+					Enchere enchere = null;
+					if(rs.getDate("date_enchere") !=  null) {
+						enchere = new Enchere();
+						enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime()));
+						enchere.setMontantEnchere(rs.getInt("montant_enchere"));						
+					}
 					detailArticle.setEnchere(enchere);
 					
 					Retrait retrait = new Retrait();

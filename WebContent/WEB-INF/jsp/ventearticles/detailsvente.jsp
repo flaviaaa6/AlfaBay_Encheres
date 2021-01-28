@@ -78,7 +78,7 @@
 					<p>image</p>
 				</div>
 
-				<div class="col-md-6 mb-3">
+				<div class="col-md-8 mb-3">
 					<!--formulaire-->
 
 
@@ -93,7 +93,7 @@
 						<div class="col-md-4 mb-3">
 							<p>Description :</p>
 						</div>
-						<div class="col-md-9 mb-3">
+						<div class="col-md-8 mb-3">
 							<p>${article.description }</p>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 						<div class="col-md-4 mb-3">
 							<p>Categorie</p>
 						</div>
-						<div class="col-md-9 mb-3">
+						<div class="col-md-8 mb-3">
 							<p>${article.categorie.libelle }</p>
 
 						</div>
@@ -157,10 +157,10 @@
 							</div>
 							<div class="col-md-3 mb-3">
 								<input type="number" class="form-control" id="proposition"
-									name="proposition" min="<p>${article.enchere.montantEnchere }</p>" placeholder="" required>
+									name="proposition" min="${article.enchere.montantEnchere +1}" placeholder="${article.enchere.montantEnchere +1 }" required>
 							</div>
 							<div class="col-md-4 mb-3">
-									<input type="submit" value ="Enchérir">
+									<input type="submit" class="btn btn-primary btn-lg btn-block" value ="Enchérir">
 							</div>
 							
 						</div>

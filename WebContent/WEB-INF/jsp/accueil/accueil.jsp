@@ -222,7 +222,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 							<div class="card">
 						<div class="card-header text-center">
 
-							<h4 class="my-0 font-weight-normal">
+							
 								<c:if test="${!empty sessionScope.utilisateurCnx.pseudo}">
 									<a
 										href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
@@ -230,10 +230,10 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 										${articleVendu.nomArticle}</a>
 								</c:if>
 								<c:if test="${empty sessionScope.utilisateurCnx.pseudo}">
-									<p class="btn btn-primary btn-lg btn-block">Article :
-										${articleVendu.nomArticle}</p>
+									<h4 class="my-0 font-weight-normal">Article :
+										${articleVendu.nomArticle}</h4>
 								</c:if>
-							</h4>
+							
 						</div>
 						<div class="d-flex">
 									<div class="col-3 p-2">
@@ -247,11 +247,12 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 										<li>Vendeur : ${articleVendu.utilisateur.pseudo}</li>
 									</ul>
 								</div>
-								<a class="mt-3 btn btn-lg btn-block btn-primary" href="#"
+								<c:if test="${!empty sessionScope.utilisateurCnx.pseudo}">
+								<a class="mt-3 btn btn-lg btn-block btn-primary" href="${pageContext.request.contextPath }/detail/vente?nomArticle=${articleVendu.nomArticle}"
 									title="faire une enchère"> <img class="small-icon"
 									src="images/bid.png">
 								</a>
-
+								</c:if>
 							</div>
 						</div>
 					</div>
