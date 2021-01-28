@@ -74,9 +74,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     	HttpSession session = request.getSession();
     	Utilisateur pseudo = (Utilisateur) session.getAttribute("utilisateurCnx");
 
-    	String parametre = String.valueOf(request. getParameter("type-encheres"));
-    	String choixE = String.valueOf(request. getParameter ("encheres"));
-    	String choixV = String.valueOf(request. getParameter ("ventes"));
+    	String parametre = String.valueOf(request.getParameter("type-encheres"));
+    	String choixE = String.valueOf(request.getParameter ("encheres"));
+    	String choixV = String.valueOf(request.getParameter ("ventes"));
 
 
     	ArticleVenduManager mgr = new ArticleVenduManager();

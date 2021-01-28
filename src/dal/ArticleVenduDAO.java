@@ -20,8 +20,8 @@ import exceptions.BuisnessException;
 public class ArticleVenduDAO {
 	
 	private static final String INSERT = " INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_enchere,"
-			+ " date_fin_enchere, prix_initial, no_categorie, no_utilisateur)" +
-			" VALUES (?,?,?,?,?,?,?)";
+			+ " date_fin_enchere, prix_initial, no_categorie, no_utilisateur, etat_vente)" +
+			" VALUES (?,?,?,?,?,?,?,?)";
 	
 	private  final  static  String  SELECT =	"select * from ARTICLES_VENDUS a "
 			+	"INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie "
@@ -87,6 +87,7 @@ public class ArticleVenduDAO {
 				pstmt.setInt(5, article.getMiseAPrix());
 				pstmt.setInt(6, article.getCategorie().getNoCategorie());
 				pstmt.setInt(7,article.getUtilisateur().getNoUtilisateur());
+				pstmt.setString(8,article.getEtatVente());
 				
 			//	LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime())
 				
