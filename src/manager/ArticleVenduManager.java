@@ -23,13 +23,13 @@ public class ArticleVenduManager {
 		
 		//creation de l'objet article:
 		ArticleVendu article = new ArticleVendu(nom, description,  dateDebut, dateFin, prixInit, utilisateur, categorie);
-		
-		if(dateDebut.isAfter(LocalDateTime.now())) {
-			article.setEtatVente("EC");
-		}
-		if(dateFin.isAfter(LocalDateTime.now())) {
-			article.setEtatVente("ET");
-		}
+		article.setEtatVente("EC");
+		//if(dateDebut.isAfter(LocalDateTime.now())) {
+		//	article.setEtatVente("EC");
+		//}
+		//if(dateFin.isAfter(LocalDateTime.now())) {
+		//	article.setEtatVente("ET");
+		//}
 
 		//envoi a la dal:
 		dao = new ArticleVenduDAO();
