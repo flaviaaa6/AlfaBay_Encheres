@@ -37,7 +37,7 @@
 				<!-- Brand/logo -->
 				<a class="navbar-brand" href="${pageContext.request.contextPath}/accueil"> <img
 					class="small-icon" src="../images/trocenchere.png"
-					alt="Accueil ENI-Encheres" height="50" width="50"> <strong>Alfa-Bay
+					alt="" height="50" width="50"> <strong>Alfa-Bay
 						Encheres</strong>
 				</a> <a class="navbar-brand" href="${pageContext.request.contextPath}/affichage" alt="Gérer mon profil"
 					title="Gérer mon profil"> <img class="small-icon"
@@ -230,7 +230,7 @@
 		<!--footer-->
 		<footer class="border-top text-center align-bottom">
 			<div class="mt-3">
-				<img class="small-icon" src="images/ateni.svg" alt="Eni Ecole">
+				<img class="small-icon" src="../images/ateni.png"  height="50" width="50" alt="Eni Ecole">
 				<small class="d-block text-muted">&copy; ENI Ecole 2020</small>
 				<div>
 					Icons made by <a href="https://www.flaticon.com/authors/freepik"
