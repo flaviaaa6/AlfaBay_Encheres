@@ -77,7 +77,7 @@ public class ServletModifierProfil extends HttpServlet {
 		request.setAttribute("message", message);
 		
 		
-	RequestDispatcher rd = request.getRequestDispatcher("/affiche");
+	RequestDispatcher rd = request.getRequestDispatcher("/affichage");
 	rd.forward(request, response);
 	}
 
