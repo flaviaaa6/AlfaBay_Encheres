@@ -242,7 +242,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 									</div>
 									<ul class="col-9 list-unstyled p-2">
 										<li>Prix :${articleVendu.miseAPrix}</li>
-										<li>Meilleure enchère : ${articleVendu.enchere.montantEnchere} point(s)</li>
+										
 										<li>Fin de l'enchère :${articleVendu.dateFinEnchere}</li>
 										<c:if test="${!empty sessionScope.utilisateurCnx}">
 											<li> Vendeur : 

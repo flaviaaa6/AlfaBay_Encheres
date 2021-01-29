@@ -26,7 +26,7 @@ public class ArticleVenduDAO {
 	private  final  static  String  SELECT =	"select * from ARTICLES_VENDUS a "
 			+	"INNER JOIN CATEGORIES c ON c.no_categorie=a.no_categorie "
 			+	"INNER JOIN UTILISATEURS u ON  u.no_utilisateur=a.no_utilisateur "
-			+   "LEFT OUTER JOIN ENCHERES e ON e.no_article=a.no_article "
+			
 			+	"where etat_vente = 'EC'"; 
 	
 	private static final String SELECTBYNAME =" SELECT * from ARTICLES_VENDUS a " 
@@ -122,13 +122,7 @@ public class ArticleVenduDAO {
 				categorie.setLibelle(rs.getString("libelle"));
 				articleVendu.setCategorie(categorie);
 				
-				Enchere enchere = null;
-				if(rs.getDate("date_enchere") !=  null) {
-					enchere = new Enchere();
-					enchere.setDateEnchere(LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()), rs.getTime("date_enchere").toLocalTime()));
-					enchere.setMontantEnchere(rs.getInt("montant_enchere"));						
-				}
-				articleVendu.setEnchere(enchere);
+				
 				
 				
 				listeRetourArticle.add(articleVendu);
