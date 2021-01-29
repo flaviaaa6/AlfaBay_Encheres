@@ -76,7 +76,8 @@ public class ServletModifierProfil extends HttpServlet {
 		
 		request.setAttribute("message", message);
 		
-	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ventearticles/nouvellevente.jsp");
+		
+	RequestDispatcher rd = request.getRequestDispatcher("/affiche");
 	rd.forward(request, response);
 	}
 

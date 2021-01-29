@@ -31,7 +31,7 @@
 			</a> <a class="navbar-brand" href="#" alt="Gérer mon profil"
 				title="Gérer mon profil"> <img class="small-icon"
 				src="images/user.png" alt=""> <span
-				class="align-middle text-muted">${PseudoUser.pseudo} ${PseudoUser.credit} credit(s)</span>
+				class="align-middle text-muted">${utilisateurCnx.pseudo} ${UtilisateurCnx.credit} credit(s)</span>
 			</a>
 		</nav>
 	</header>
