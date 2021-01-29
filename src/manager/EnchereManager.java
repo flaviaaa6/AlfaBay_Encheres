@@ -15,7 +15,7 @@ public class EnchereManager {
 	EnchereDAO dao = new EnchereDAO();
 	BuisnessException exception = new BuisnessException();
 	
-	public void insererEnchere(Enchere enchere, int ancienMontant, Utilisateur util) throws SQLException, BuisnessException {
+	public void insererEnchere(Enchere enchere, int ancienMontant, Utilisateur util) throws BuisnessException {
 		try {
 			validerProposition(enchere.getMontantEnchere(), ancienMontant );
 		} catch (Exception e) {

@@ -94,12 +94,10 @@ public class ServletAfficherDetailVente extends HttpServlet {
 		
 			try {
 				manager.insererEnchere(enchere, articleDetail.getEnchere().getMontantEnchere(), utilisateurCnx);
-			} catch (BuisnessException | SQLException e) {
-				// TODO Auto-generated catch block
+			} catch (BuisnessException e) {
+				request.setAttribute("erreurs", e.getListeMessagesErreur());
+				message = "erreur, l'enchère n'a pas été validée";
 			
-			message = "erreur, l'enchère n'a pas été validée";
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		
@@ -114,6 +112,7 @@ public class ServletAfficherDetailVente extends HttpServlet {
 			
 		request.setAttribute("message", message);		
 		request.setAttribute("article", articleDetail);
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/ventearticles/detailsvente.jsp");
 		rd.forward(request, response);
