@@ -114,6 +114,7 @@
 						</div>
 						<div class="col-md-4 mb-3">
 							<p>${article.enchere.montantEnchere }</p>
+							
 						</div>
 					</div>
 					<div class="row">
@@ -121,7 +122,7 @@
 							<p>Mise a prix :</p>
 						</div>
 						<div class="col-md-4 mb-3">
-							<p>${article.nomArticle }</p>
+							<p>${article.miseAPrix }</p>
 						</div>
 					</div>
 					<div class="row">
@@ -157,7 +158,7 @@
 							</div>
 							<div class="col-md-3 mb-3">
 								<input type="number" class="form-control" id="proposition"
-									name="proposition" min="${article.enchere.montantEnchere +1}" placeholder="${article.enchere.montantEnchere +1 }" required>
+									name="proposition" min="${article.enchere.montantEnchere +1}" placeholder = "${article.miseAPrix }" value="${article.enchere.montantEnchere +1 }" required>
 							</div>
 							<div class="col-md-4 mb-3">
 									<input type="submit" class="btn btn-primary btn-lg btn-block" value ="Enchérir">

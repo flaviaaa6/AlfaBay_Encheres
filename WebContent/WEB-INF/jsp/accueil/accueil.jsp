@@ -58,7 +58,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 								<span class="align-middle text-muted">BIENVENU(E)
 									${utilisateurCnx.pseudo}, ${utilisateurCnx.credit} credit(s)</span>
 			       	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			       	<a class="dropdown-item" href="#">Enchères</a>
+			       	<a class="dropdown-item" href="#">Administrer</a>
 								<a class="dropdown-item"
 									href="${pageContext.request.contextPath}/vente/add">Vendre
 									un article</a>
@@ -90,7 +90,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 							${utilisateurCnx.pseudo}, ${utilisateurCnx.credit} credit(s)</span>
        		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
        		<li class="nav-item d-none d-lg-block"><a class="nav-link"
-							href="#">Enchères</a></li>
+							href="#">Administrer</a></li>
 						<li class="nav-item d-none d-lg-block"><a class="nav-link"
 							href="${pageContext.request.contextPath}/vente/add">Vendre un article</a></li>
 						<a class="nav-link"
@@ -241,7 +241,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 											alt="pas de photo" />
 									</div>
 									<ul class="col-9 list-unstyled p-2">
-										<li>Prix :${articleVendu.miseAPrix}</li>
+										<li>Mise a Prix :${articleVendu.miseAPrix}</li>
 										
 										<li>Fin de l'enchère :${articleVendu.dateFinEnchere}</li>
 										<c:if test="${!empty sessionScope.utilisateurCnx}">
